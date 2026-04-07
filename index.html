@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +47,6 @@
     --border:  rgba(255,255,255,0.07);
     --amber:   #c8893a;
     --amber-l: #d4a04a;
-    --rust:    #a85c38;
     --text:    #f0ece4;
     --muted:   #c0b8a8;
     --bright:  #faf8f4;
@@ -61,8 +60,9 @@
     background: var(--base);
     color: var(--text);
     font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.8;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -90,19 +90,50 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
   }
 
   .hero-nav-label {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
   }
 
+  .hero-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Flag switcher */
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .flag-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 2px;
+    opacity: 0.4;
+    transition: opacity 0.2s, transform 0.15s;
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .flag-btn:hover { opacity: 0.8; transform: scale(1.1); }
+  .flag-btn.active { opacity: 1; }
+
   .hero-nav-link {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--amber);
@@ -122,7 +153,7 @@
 
   .hero-eyebrow {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--amber);
@@ -148,16 +179,9 @@
     margin-bottom: 24px;
     text-transform: uppercase;
   }
-
   .hero-name span { color: var(--amber); }
 
-  .hero-desc {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--muted);
-    max-width: 520px;
-    line-height: 1.8;
-  }
+  .hero-desc { font-size: 24px; color: var(--muted); max-width: 520px; line-height: 1.6; }
 
   /* Metric cards */
   .hero-cards {
@@ -174,7 +198,6 @@
     position: relative;
     overflow: hidden;
   }
-
   .card::before {
     content: '';
     position: absolute;
@@ -194,26 +217,15 @@
     margin-bottom: 6px;
   }
 
-  .card-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    line-height: 1.5;
-  }
+  .card-label { font-family: var(--mono); font-size: 13px; color: var(--muted); line-height: 1.5; }
 
   /* ── SECTIONS ── */
-  section {
-    padding: 72px 80px;
-    border-bottom: 1px solid var(--border);
-  }
-
+  section { padding: 72px 80px; border-bottom: 1px solid var(--border); }
   section.alt { background: var(--surface); }
 
   .sec-label {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--amber);
@@ -222,37 +234,19 @@
     align-items: center;
     gap: 14px;
   }
-  .sec-label::after {
-    content: '';
-    flex: 1;
-    max-width: 60px;
-    height: 1px;
-    background: var(--border);
-  }
+  .sec-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--border); }
 
   /* ── RESULTS ── */
-  .results-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
+  .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
   .result-card {
     background: var(--raised);
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 32px 28px;
-    position: relative;
   }
 
-  .result-num {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    margin-bottom: 14px;
-    display: block;
-  }
+  .result-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 14px; display: block; }
 
   .result-title {
     font-family: 'Barlow Condensed', sans-serif;
@@ -265,33 +259,17 @@
     line-height: 1.2;
   }
 
-  .result-body {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.75;
-  }
-
-  .result-body strong {
-    color: var(--text);
-    font-weight: 400;
-  }
+  .result-body { font-size: 17px; color: var(--muted); line-height: 1.75; }
+  .result-body strong { color: var(--text); font-weight: 400; }
 
   /* ── SKILLS ── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px 64px;
-  }
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 64px; }
 
-  .skill-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
+  .skill-group { display: flex; flex-direction: column; gap: 0; }
 
   .skill-group h4 {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--amber);
@@ -300,10 +278,7 @@
     border-bottom: 1px solid var(--border);
   }
 
-  .skill-group.ai-featured h4 {
-    color: var(--amber-l);
-  }
-
+  .skill-group.ai-featured h4 { color: var(--amber-l); }
   .skill-group.ai-featured {
     background: var(--raised);
     border: 1px solid rgba(200,137,58,0.2);
@@ -311,42 +286,12 @@
     padding: 20px 22px;
   }
 
-  .skill-entry {
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-  }
+  .skill-entry { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
 
-  .skill-main {
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--text);
-    display: block;
-    line-height: 1.3;
-  }
-
-  .skill-group.ai-featured .skill-main {
-    color: var(--bright);
-  }
-
-  .skill-sub {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-    display: block;
-    margin-top: 2px;
-    line-height: 1.5;
-  }
-
-  .skill-plain {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--muted);
-    display: block;
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-    line-height: 1.3;
-  }
+  .skill-main { font-size: 16px; font-weight: 400; color: var(--text); display: block; line-height: 1.3; }
+  .skill-group.ai-featured .skill-main { color: var(--bright); }
+  .skill-sub { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.05em; display: block; margin-top: 2px; line-height: 1.5; }
+  .skill-plain { font-size: 16px; font-weight: 300; color: var(--muted); display: block; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.03); line-height: 1.3; }
 
   /* ── CAREER ── */
   .exp-row {
@@ -359,29 +304,13 @@
   }
   .exp-row:first-of-type { border-top: 1px solid var(--border); }
 
-  .exp-period {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-  }
-
-  .exp-role {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text);
-  }
-  .exp-role span {
-    display: block;
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--muted);
-    margin-top: 2px;
-  }
+  .exp-period { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+  .exp-role { font-size: 16px; font-weight: 400; color: var(--text); }
+  .exp-role span { display: block; font-size: 13px; font-weight: 300; color: var(--muted); margin-top: 2px; }
 
   .exp-tag {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: 4px 10px;
@@ -390,17 +319,10 @@
     color: var(--muted);
     white-space: nowrap;
   }
-  .exp-tag.end {
-    border-color: rgba(200,137,58,0.3);
-    color: var(--amber);
-  }
+  .exp-tag.end { border-color: rgba(200,137,58,0.3); color: var(--amber); }
 
   /* ── LANGUAGES ── */
-  .lang-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-  }
+  .lang-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
 
   .lang-name {
     font-family: 'Barlow Condensed', sans-serif;
@@ -412,30 +334,10 @@
     display: block;
     margin-bottom: 3px;
   }
+  .lang-level { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 10px; }
 
-  .lang-level {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .lang-track {
-    height: 2px;
-    background: var(--border);
-    border-radius: 1px;
-    position: relative;
-  }
-  .lang-track::after {
-    content: '';
-    position: absolute; left: 0; top: 0;
-    height: 100%;
-    background: var(--amber);
-    border-radius: 1px;
-  }
+  .lang-track { height: 2px; background: var(--border); border-radius: 1px; position: relative; }
+  .lang-track::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; background: var(--amber); border-radius: 1px; }
   .lang-track.p100::after { width: 100%; }
   .lang-track.p95::after  { width: 95%; }
   .lang-track.p80::after  { width: 80%; }
@@ -461,24 +363,11 @@
     text-transform: uppercase;
     color: var(--bright);
   }
+  .closer-tagline em { font-style: normal; color: var(--amber); }
+  .closer-note { font-size: 16px; color: var(--muted); line-height: 1.85; }
+  .closer-note strong { color: var(--text); font-weight: 400; }
 
-  .closer-tagline em {
-    font-style: normal;
-    color: var(--amber);
-  }
-
-  .closer-note {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.85;
-  }
-
-  .closer-note strong {
-    color: var(--text);
-    font-weight: 400;
-  }
-
-  /* ── FOOTER / CTA ── */
+  /* ── FOOTER ── */
   .footer {
     padding: 56px 80px;
     background: var(--surface);
@@ -489,11 +378,7 @@
     border-top: 1px solid var(--border);
   }
 
-  .footer-left {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  .footer-left { display: flex; flex-direction: column; gap: 10px; }
 
   .footer-heading {
     font-family: 'Barlow Condensed', sans-serif;
@@ -505,18 +390,14 @@
     line-height: 1;
   }
 
-  .footer-note {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
+  .footer-note { font-size: 15px; color: var(--muted); line-height: 1.6; }
 
   .footer-linkedin {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.1em;
     color: var(--amber);
     text-decoration: none;
@@ -561,15 +442,10 @@
     align-items: center;
     gap: 10px;
   }
+  .cta-link-text::after { content: '→'; font-size: 20px; }
 
-  .cta-link-text::after {
-    content: '→';
-    font-size: 20px;
-  }
-
+  /* ── RESPONSIVE ── */
   @media (max-width: 960px) {
-    .footer { grid-template-columns: 1fr; }
-    .cta-link { align-self: flex-start; }
     .hero, section, .closer, .footer { padding: 48px 32px; }
     .hero-cards { grid-template-columns: 1fr 1fr; }
     .results-grid { grid-template-columns: 1fr; }
@@ -577,161 +453,399 @@
     .lang-grid { grid-template-columns: repeat(3, 1fr); }
     .exp-row { grid-template-columns: 1fr; gap: 6px; }
     .closer { grid-template-columns: 1fr; gap: 40px; }
+    .footer { grid-template-columns: 1fr; }
+    .cta-link { align-self: flex-start; }
   }
-
-  /* ── TYPOGRAPHY OVERRIDES ── */
-  body { font-weight: 400; font-size: 16px; line-height: 1.8; }
-  .hero-desc     { font-size: 24px; }
-  .result-body   { font-size: 17px; }
-  .skill-main    { font-size: 16px; }
-  .skill-plain   { font-size: 16px; }
-  .exp-role      { font-size: 16px; }
-  .exp-role span { font-size: 13px; }
-  .closer-note   { font-size: 16px; }
-  .footer-note   { font-size: 15px; }
-  .hero-nav-label  { font-size: 11px; }
-  .hero-nav-link   { font-size: 11px; }
-  .hero-eyebrow    { font-size: 12px; }
-  .card-label      { font-size: 13px; }
-  .sec-label       { font-size: 10px; }
-  .result-num      { font-size: 10px; }
-  .skill-group h4  { font-size: 10px; }
-  .skill-sub       { font-size: 11px; }
-  .exp-period      { font-size: 11px; }
-  .exp-tag         { font-size: 10px; }
-  .lang-level      { font-size: 10px; }
-  .footer-linkedin { font-size: 12px; }
-
 </style>
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════
+     LANGUAGE DATA
+════════════════════════════════════════════════ -->
+<script>
+const LANG = {
+  de: {
+    htmlLang: 'de',
+    navLabel: 'Performance Marketing · Berlin · 2026',
+    eyebrow: 'Online Performance Marketing Manager',
+    desc: 'Über 5 Jahre Erfahrung in der Kundengewinnung und Marktexpansion — über bezahlte Kanäle, Analytics-Infrastruktur und Produktentwicklung — in regulierten und wachstumsstarken Märkten.',
+    card1: 'Kundenwachstum · Linara · erstes Jahr',
+    card2: 'EU-Märkte · aktive Recruitment-Kampagnen',
+    card3: 'Linara GmbH Berlin · bis Apr. 2026',
+    card4: 'KI-Chatbot gebaut · WhatsApp, Telegram, Messenger, Webchat',
+    secResults: 'Ausgewählte Ergebnisse',
+    r1title: '200% Kundenwachstum · Linara Deutschland',
+    r1body: 'Nicht funktionierende Google Ads Kampagnen übernommen. Strategie, Kontostruktur, Zielgruppenansprache und Conversion-Tracking von Grund auf neu aufgebaut. <strong>Den Kundenstamm im ersten Jahr verdoppelt und verdreifacht.</strong>',
+    r2title: 'Faircare · Sieben Märkte aktiviert',
+    r2body: 'Google Ads und Meta Ads in PL, RO, HU, HR, BG, LT und SK von null aufgebaut. <strong>Beide Kanäle performen jetzt vergleichbar</strong> als aktive Recruitment-Akquisitionsquellen.',
+    r3title: 'Marketingstrategie · Beide Marken',
+    r3body: 'Den vollständigen Marketingplan und die Strategie für Linara und Faircare entwickelt — <strong>Channel-Mix, Budgetallokation, Marktpositionierung,</strong> Zielgruppensegmentierung und internationaler Expansionsplan.',
+    r4title: 'KI-Chatbot · Eigenständig entwickelt',
+    r4body: 'Eine Lücke im Beratungsfunnel identifiziert. Niemand im Team hatte die technischen Fähigkeiten. <strong>Einen Python Flask Chatbot</strong> über vier Kanäle mit Entscheidungsbaum-Logik gebaut — vollständig außerhalb des ursprünglichen Aufgabenbereichs.',
+    secSkills: 'Tech Stack',
+    h4paid: 'Bezahlte Werbung',
+    liSub1: 'Suche · Display · Performance Max · Shopping',
+    liSub2: 'Facebook · Instagram · Katalog',
+    liSub3: 'B2B · Recruitment-Kampagnen',
+    h4ai: 'KI & Entwicklung',
+    aiMain1: 'KI-Chatbot-Entwicklung',
+    aiSub1: 'WhatsApp · Telegram · Messenger · Webchat · Entscheidungsbäume',
+    aiMain2: 'Prompt Engineering & LLM-Integration',
+    aiSub2: 'Claude · GPT · Anthropic API · Workflow-Automatisierung',
+    aiMain3: 'Python / Flask',
+    aiSub3: 'Backend · API-Integrationen · Automatisierungsskripte',
+    h4analytics: 'Analytics & Daten',
+    anSub1: 'Attributionsmodellierung · Client-ID-Matching · Reporting',
+    anSub2: 'Event-Tracking · E-Commerce · Custom Dimensions',
+    h4strategy: 'Strategie',
+    stMain1: 'Marketingstrategie & -planung',
+    stSub1: '4Ps / 7Ps · STP-Framework',
+    stMain2: 'Zielgruppen-Targeting & Segmentierung',
+    stSub2: 'International · Mehrsprachig · Multi-Markt',
+    stPlain1: 'Funnel-Architektur',
+    stPlain2: 'Technisches SEO',
+    stPlain3: 'Internationale Marktexpansion',
+    secCareer: 'Werdegang',
+    job1role: 'Online Performance Marketing Manager',
+    job1co: 'Linara GmbH · Berlin · Teilzeit Hybrid',
+    job1tag: 'Bis Apr. 2026',
+    job2role: 'IT-Support — TikTok Ads Plattform',
+    job2co: 'TikTok · Berlin',
+    job3role: 'Sales Performance Marketing Specialist',
+    job3co: 'Concentrix für Meta Ads · Berlin',
+    job4role: 'Online Marketer — Google Ads & Analytics',
+    job4co: 'Majorel für Google · Berlin · DACH',
+    job5role: 'Deutschlehrer',
+    job5co: 'Freiberuflich · Berlin',
+    secLang: 'Sprachen',
+    lv1: 'Muttersprache',
+    lv3: 'K1 · EU-Staatsbürger',
+    lv5: 'Konversationssicher',
+    taglineWord1: 'Strategie.',
+    taglineWord2: 'Code.',
+    taglineWord3: 'Ergebnisse.',
+    closerNote: 'Die Kombination ist seltener als sie klingt. Internationale Akquisitionskampagnen über sieben Märkte hinweg führen, die Marketingstrategie ausarbeiten, den Analytics-Stack aufbauen und die Tools entwickeln, die dem Team fehlten — so sahen die letzten drei Jahre bei Linara aus.',
+    closerEdu: 'Lehramt Deutsch als Fremdsprache · Universidade Federal do Paraná · Brasilien.',
+    closerAvail: 'In Berlin seit 2017. Verfügbar ab Mai 2026.',
+    footerHeading: 'Interesse geweckt?',
+    footerNote: 'Der ausführliche Lebenslauf umfasst jeden Berufseinstieg, das vollständige Analytics-Setup, die Chatbot-Architektur und die Strategiearbeit — mit genug Detail für eine fundierte Entscheidung.',
+    ctaLabel: 'Vollständiger Lebenslauf',
+    ctaText: 'Jetzt ansehen',
+  },
+  en: {
+    htmlLang: 'en',
+    navLabel: 'Performance Marketing · Berlin · 2026',
+    eyebrow: 'Online Performance Marketing Manager',
+    desc: '5+ years driving customer acquisition and market expansion — across paid channels, analytics infrastructure, and product development — in regulated and high-growth markets.',
+    card1: 'Customer growth · Linara · year one',
+    card2: 'EU markets · active recruitment campaigns',
+    card3: 'Linara GmbH Berlin · until Apr 2026',
+    card4: 'AI chatbot built · WhatsApp, Telegram, Messenger, webchat',
+    secResults: 'Selected results',
+    r1title: '200% customer growth · Linara Germany',
+    r1body: 'Inherited non-functional Google Ads campaigns. Rebuilt strategy, account structure, audience targeting, and conversion tracking from scratch. <strong>Doubled and tripled the customer base within the first year.</strong>',
+    r2title: 'Faircare · seven markets activated',
+    r2body: 'Rebuilt Google Ads and Meta Ads from zero across PL, RO, HU, HR, BG, LT, and SK. <strong>Both channels now perform comparably</strong> as active recruitment acquisition sources.',
+    r3title: 'Marketing strategy · both brands',
+    r3body: 'Developed the full marketing plan and strategy for Linara and Faircare — <strong>channel mix, budget allocation, market positioning,</strong> audience segmentation, and international expansion roadmap.',
+    r4title: 'AI chatbot · built independently',
+    r4body: 'Identified a gap in the consultation funnel. Nobody on the team had the technical skills. <strong>Built a Python Flask chatbot</strong> across four channels with decision tree logic — entirely outside the original job scope.',
+    secSkills: 'Tech stack',
+    h4paid: 'Paid Acquisition',
+    liSub1: 'Search · Display · Performance Max · Shopping',
+    liSub2: 'Facebook · Instagram · Catalogue',
+    liSub3: 'B2B · Recruitment campaigns',
+    h4ai: 'AI & Development',
+    aiMain1: 'AI Chatbot Development',
+    aiSub1: 'WhatsApp · Telegram · Messenger · Webchat · Decision trees',
+    aiMain2: 'Prompt Engineering & LLM Integration',
+    aiSub2: 'Claude · GPT · Anthropic API · Workflow automation',
+    aiMain3: 'Python / Flask',
+    aiSub3: 'Backend · API integrations · Automation scripts',
+    h4analytics: 'Analytics & Data',
+    anSub1: 'Attribution modelling · Client ID matching · Reporting',
+    anSub2: 'Event tracking · E-commerce · Custom dimensions',
+    h4strategy: 'Strategy',
+    stMain1: 'Marketing Strategy & Planning',
+    stSub1: '4Ps / 7Ps · STP Framework',
+    stMain2: 'Audience Targeting & Segmentation',
+    stSub2: 'International · Multilingual · Multi-market',
+    stPlain1: 'Funnel Architecture',
+    stPlain2: 'Technical SEO',
+    stPlain3: 'International Market Expansion',
+    secCareer: 'Career',
+    job1role: 'Online Performance Marketing Manager',
+    job1co: 'Linara GmbH · Berlin · Part-time Hybrid',
+    job1tag: 'Until Apr 2026',
+    job2role: 'IT Support — TikTok Ads Platform',
+    job2co: 'TikTok · Berlin',
+    job3role: 'Sales Performance Marketing Specialist',
+    job3co: 'Concentrix for Meta Ads · Berlin',
+    job4role: 'Online Marketer — Google Ads & Analytics',
+    job4co: 'Majorel for Google · Berlin · DACH',
+    job5role: 'German Language Teacher',
+    job5co: 'Freelance · Berlin',
+    secLang: 'Languages',
+    lv1: 'Native',
+    lv3: 'C1 · EU Citizen',
+    lv5: 'Conversational',
+    taglineWord1: 'Strategy.',
+    taglineWord2: 'Code.',
+    taglineWord3: 'Results.',
+    closerNote: 'The combination is less common than it sounds. Running international acquisition campaigns across seven markets, writing the marketing strategy, building the analytics stack, and developing the tools the team was missing — that is what the last three years at Linara looked like.',
+    closerEdu: 'Lehramt Deutsch als Fremdsprache · Universidade Federal do Paraná · Brazil.',
+    closerAvail: 'Berlin-based since 2017. Available from May 2026.',
+    footerHeading: 'Want the full picture?',
+    footerNote: 'The detailed CV covers every role, the full analytics setup, the chatbot architecture, and the strategy work — with enough detail to make a decision.',
+    ctaLabel: 'Full professional CV',
+    ctaText: 'View detailed CV',
+  }
+};
+
+function applyLang(code) {
+  const t = LANG[code];
+  document.documentElement.lang = t.htmlLang;
+
+  // Nav
+  document.getElementById('nav-label').textContent = t.navLabel;
+
+  // Hero
+  document.getElementById('hero-eyebrow').textContent = t.eyebrow;
+  document.getElementById('hero-desc').textContent = t.desc;
+  document.getElementById('card1-label').textContent = t.card1;
+  document.getElementById('card2-label').textContent = t.card2;
+  document.getElementById('card3-label').textContent = t.card3;
+  document.getElementById('card4-label').textContent = t.card4;
+
+  // Results
+  document.getElementById('sec-results').textContent = t.secResults;
+  document.getElementById('r1title').textContent = t.r1title;
+  document.getElementById('r1body').innerHTML = t.r1body;
+  document.getElementById('r2title').textContent = t.r2title;
+  document.getElementById('r2body').innerHTML = t.r2body;
+  document.getElementById('r3title').textContent = t.r3title;
+  document.getElementById('r3body').innerHTML = t.r3body;
+  document.getElementById('r4title').textContent = t.r4title;
+  document.getElementById('r4body').innerHTML = t.r4body;
+
+  // Skills
+  document.getElementById('sec-skills').textContent = t.secSkills;
+  document.getElementById('h4-paid').textContent = t.h4paid;
+  document.getElementById('li-sub1').textContent = t.liSub1;
+  document.getElementById('li-sub2').textContent = t.liSub2;
+  document.getElementById('li-sub3').textContent = t.liSub3;
+  document.getElementById('h4-ai').textContent = t.h4ai;
+  document.getElementById('ai-main1').textContent = t.aiMain1;
+  document.getElementById('ai-sub1').textContent = t.aiSub1;
+  document.getElementById('ai-main2').textContent = t.aiMain2;
+  document.getElementById('ai-sub2').textContent = t.aiSub2;
+  document.getElementById('ai-main3').textContent = t.aiMain3;
+  document.getElementById('ai-sub3').textContent = t.aiSub3;
+  document.getElementById('h4-analytics').textContent = t.h4analytics;
+  document.getElementById('an-sub1').textContent = t.anSub1;
+  document.getElementById('an-sub2').textContent = t.anSub2;
+  document.getElementById('h4-strategy').textContent = t.h4strategy;
+  document.getElementById('st-main1').textContent = t.stMain1;
+  document.getElementById('st-sub1').textContent = t.stSub1;
+  document.getElementById('st-main2').textContent = t.stMain2;
+  document.getElementById('st-sub2').textContent = t.stSub2;
+  document.getElementById('st-plain1').textContent = t.stPlain1;
+  document.getElementById('st-plain2').textContent = t.stPlain2;
+  document.getElementById('st-plain3').textContent = t.stPlain3;
+
+  // Career
+  document.getElementById('sec-career').textContent = t.secCareer;
+  document.getElementById('job1-role').childNodes[0].textContent = t.job1role;
+  document.getElementById('job1-co').textContent = t.job1co;
+  document.getElementById('job1-tag').textContent = t.job1tag;
+  document.getElementById('job2-role').childNodes[0].textContent = t.job2role;
+  document.getElementById('job2-co').textContent = t.job2co;
+  document.getElementById('job3-role').childNodes[0].textContent = t.job3role;
+  document.getElementById('job3-co').textContent = t.job3co;
+  document.getElementById('job4-role').childNodes[0].textContent = t.job4role;
+  document.getElementById('job4-co').textContent = t.job4co;
+  document.getElementById('job5-role').childNodes[0].textContent = t.job5role;
+  document.getElementById('job5-co').textContent = t.job5co;
+
+  // Languages section label
+  document.getElementById('sec-lang').textContent = t.secLang;
+  document.getElementById('lv-native').textContent = t.lv1;
+  document.getElementById('lv-it').textContent = t.lv3;
+  document.getElementById('lv-es').textContent = t.lv5;
+
+  // Closer
+  document.getElementById('tagline-1').textContent = t.taglineWord1;
+  document.getElementById('tagline-2').textContent = t.taglineWord2;
+  document.getElementById('tagline-3').textContent = t.taglineWord3;
+  document.getElementById('closer-note').textContent = t.closerNote;
+  document.getElementById('closer-edu').textContent = t.closerEdu;
+  document.getElementById('closer-avail').textContent = t.closerAvail;
+
+  // Footer
+  document.getElementById('footer-heading').textContent = t.footerHeading;
+  document.getElementById('footer-note').textContent = t.footerNote;
+  document.getElementById('cta-label').textContent = t.ctaLabel;
+  document.getElementById('cta-text').textContent = t.ctaText;
+
+  // Flag buttons
+  document.querySelectorAll('.flag-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('flag-' + code).classList.add('active');
+
+  // GA4
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'language_switch', { language: code });
+  }
+
+  localStorage.setItem('preferred_lang', code);
+}
+
+function switchLang(code) { applyLang(code); }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('preferred_lang');
+  const browser = navigator.language || navigator.userLanguage || 'de';
+  const detected = saved || (browser.startsWith('de') ? 'de' : 'en');
+  applyLang(detected);
+});
+</script>
+
+<!-- ═══════════════════════════════════════════════
+     HTML — German as default text (overwritten by JS)
+════════════════════════════════════════════════ -->
+
 <!-- HERO -->
 <div class="hero">
   <nav class="hero-nav">
-    <span class="hero-nav-label">Performance Marketing · Berlin · 2026</span>
-    <a href="https://www.linkedin.com/in/tiago-leichsenring-34134536/" class="hero-nav-link" target="_blank" rel="noopener">LinkedIn</a>
+    <span class="hero-nav-label" id="nav-label">Performance Marketing · Berlin · 2026</span>
+    <div class="hero-nav-right">
+      <div class="lang-switcher">
+        <button class="flag-btn active" id="flag-de" onclick="switchLang('de')" title="Deutsch" aria-label="Deutsch">🇩🇪</button>
+        <button class="flag-btn" id="flag-en" onclick="switchLang('en')" title="English" aria-label="English">🇬🇧</button>
+      </div>
+      <a href="https://www.linkedin.com/in/tiago-leichsenring-34134536/" class="hero-nav-link" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </nav>
 
   <div class="hero-main">
-    <div class="hero-eyebrow">Online Performance Marketing Manager</div>
+    <div class="hero-eyebrow" id="hero-eyebrow">Online Performance Marketing Manager</div>
     <h1 class="hero-name">Tiago<br><span>Leichsenring</span></h1>
-    <p class="hero-desc">5+ years driving customer acquisition and market expansion — across paid channels, analytics infrastructure, and product development — in regulated and high-growth markets.</p>
+    <p class="hero-desc" id="hero-desc">Über 5 Jahre Erfahrung in der Kundengewinnung und Marktexpansion — über bezahlte Kanäle, Analytics-Infrastruktur und Produktentwicklung — in regulierten und wachstumsstarken Märkten.</p>
   </div>
 
   <div class="hero-cards">
     <div class="card">
       <span class="card-value">200%</span>
-      <span class="card-label">Customer growth · Linara · year one</span>
+      <span class="card-label" id="card1-label">Kundenwachstum · Linara · erstes Jahr</span>
     </div>
     <div class="card">
       <span class="card-value">7</span>
-      <span class="card-label">EU markets · active recruitment campaigns</span>
+      <span class="card-label" id="card2-label">EU-Märkte · aktive Recruitment-Kampagnen</span>
     </div>
     <div class="card">
-      <span class="card-value">3 yrs</span>
-      <span class="card-label">Linara GmbH Berlin · until Apr 2026</span>
+      <span class="card-value">3 J.</span>
+      <span class="card-label" id="card3-label">Linara GmbH Berlin · bis Apr. 2026</span>
     </div>
     <div class="card">
-      <span class="card-value">4 ch</span>
-      <span class="card-label">AI chatbot built · WhatsApp, Telegram, Messenger, webchat</span>
+      <span class="card-value">4 K.</span>
+      <span class="card-label" id="card4-label">KI-Chatbot gebaut · WhatsApp, Telegram, Messenger, Webchat</span>
     </div>
   </div>
 </div>
 
 <!-- RESULTS -->
 <section>
-  <div class="sec-label">Selected results</div>
+  <div class="sec-label" id="sec-results">Ausgewählte Ergebnisse</div>
   <div class="results-grid">
     <div class="result-card">
       <span class="result-num">01</span>
-      <div class="result-title">200% customer growth · Linara Germany</div>
-      <p class="result-body">Inherited non-functional Google Ads campaigns. Rebuilt strategy, account structure, audience targeting, and conversion tracking from scratch. <strong>Doubled and tripled the customer base within the first year.</strong></p>
+      <div class="result-title" id="r1title">200% Kundenwachstum · Linara Deutschland</div>
+      <p class="result-body" id="r1body">Nicht funktionierende Google Ads Kampagnen übernommen. Strategie, Kontostruktur, Zielgruppenansprache und Conversion-Tracking von Grund auf neu aufgebaut. <strong>Den Kundenstamm im ersten Jahr verdoppelt und verdreifacht.</strong></p>
     </div>
     <div class="result-card">
       <span class="result-num">02</span>
-      <div class="result-title">Faircare · seven markets activated</div>
-      <p class="result-body">Rebuilt Google Ads and Meta Ads from zero across PL, RO, HU, HR, BG, LT, and SK. <strong>Both channels now perform comparably</strong> as active recruitment acquisition sources.</p>
+      <div class="result-title" id="r2title">Faircare · Sieben Märkte aktiviert</div>
+      <p class="result-body" id="r2body">Google Ads und Meta Ads in PL, RO, HU, HR, BG, LT und SK von null aufgebaut. <strong>Beide Kanäle performen jetzt vergleichbar</strong> als aktive Recruitment-Akquisitionsquellen.</p>
     </div>
     <div class="result-card">
       <span class="result-num">03</span>
-      <div class="result-title">Marketing strategy · both brands</div>
-      <p class="result-body">Developed the full marketing plan and strategy for Linara and Faircare — <strong>channel mix, budget allocation, market positioning,</strong> audience segmentation, and international expansion roadmap.</p>
+      <div class="result-title" id="r3title">Marketingstrategie · Beide Marken</div>
+      <p class="result-body" id="r3body">Den vollständigen Marketingplan und die Strategie für Linara und Faircare entwickelt — <strong>Channel-Mix, Budgetallokation, Marktpositionierung,</strong> Zielgruppensegmentierung und internationaler Expansionsplan.</p>
     </div>
     <div class="result-card">
       <span class="result-num">04</span>
-      <div class="result-title">AI chatbot · built independently</div>
-      <p class="result-body">Identified a gap in the consultation funnel. Nobody on the team had the technical skills. <strong>Built a Python Flask chatbot</strong> across four channels with decision tree logic — entirely outside the original job scope.</p>
+      <div class="result-title" id="r4title">KI-Chatbot · Eigenständig entwickelt</div>
+      <p class="result-body" id="r4body">Eine Lücke im Beratungsfunnel identifiziert. Niemand im Team hatte die technischen Fähigkeiten. <strong>Einen Python Flask Chatbot</strong> über vier Kanäle mit Entscheidungsbaum-Logik gebaut — vollständig außerhalb des ursprünglichen Aufgabenbereichs.</p>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section class="alt">
-  <div class="sec-label">Tech stack</div>
+  <div class="sec-label" id="sec-skills">Tech Stack</div>
   <div class="skills-grid">
 
     <div class="skill-group">
-      <h4>Paid Acquisition</h4>
+      <h4 id="h4-paid">Bezahlte Werbung</h4>
       <div class="skill-entry">
         <span class="skill-main">Google Ads</span>
-        <span class="skill-sub">Search · Display · Performance Max · Shopping</span>
+        <span class="skill-sub" id="li-sub1">Suche · Display · Performance Max · Shopping</span>
       </div>
       <div class="skill-entry">
         <span class="skill-main">Meta Ads</span>
-        <span class="skill-sub">Facebook · Instagram · Catalogue</span>
+        <span class="skill-sub" id="li-sub2">Facebook · Instagram · Katalog</span>
       </div>
       <div class="skill-entry">
         <span class="skill-main">LinkedIn Ads</span>
-        <span class="skill-sub">B2B · Recruitment campaigns</span>
+        <span class="skill-sub" id="li-sub3">B2B · Recruitment-Kampagnen</span>
       </div>
       <span class="skill-plain">Bing Ads</span>
     </div>
 
     <div class="skill-group ai-featured">
-      <h4>AI &amp; Development</h4>
+      <h4 id="h4-ai">KI &amp; Entwicklung</h4>
       <div class="skill-entry">
-        <span class="skill-main">AI Chatbot Development</span>
-        <span class="skill-sub">WhatsApp · Telegram · Messenger · Webchat · Decision trees</span>
+        <span class="skill-main" id="ai-main1">KI-Chatbot-Entwicklung</span>
+        <span class="skill-sub" id="ai-sub1">WhatsApp · Telegram · Messenger · Webchat · Entscheidungsbäume</span>
       </div>
       <div class="skill-entry">
-        <span class="skill-main">Prompt Engineering &amp; LLM Integration</span>
-        <span class="skill-sub">Claude · GPT · Anthropic API · Workflow automation</span>
+        <span class="skill-main" id="ai-main2">Prompt Engineering &amp; LLM-Integration</span>
+        <span class="skill-sub" id="ai-sub2">Claude · GPT · Anthropic API · Workflow-Automatisierung</span>
       </div>
       <div class="skill-entry">
-        <span class="skill-main">Python / Flask</span>
-        <span class="skill-sub">Backend · API integrations · Automation scripts</span>
+        <span class="skill-main" id="ai-main3">Python / Flask</span>
+        <span class="skill-sub" id="ai-sub3">Backend · API-Integrationen · Automatisierungsskripte</span>
       </div>
       <span class="skill-plain">JavaScript · HTML5 · CSS3</span>
     </div>
 
     <div class="skill-group">
-      <h4>Analytics &amp; Data</h4>
+      <h4 id="h4-analytics">Analytics &amp; Daten</h4>
       <div class="skill-entry">
         <span class="skill-main">BigQuery / SQL</span>
-        <span class="skill-sub">Attribution modelling · Client ID matching · Reporting</span>
+        <span class="skill-sub" id="an-sub1">Attributionsmodellierung · Client-ID-Matching · Reporting</span>
       </div>
       <div class="skill-entry">
         <span class="skill-main">Google Analytics 4</span>
-        <span class="skill-sub">Event tracking · E-commerce · Custom dimensions</span>
+        <span class="skill-sub" id="an-sub2">Event-Tracking · E-Commerce · Custom Dimensions</span>
       </div>
       <span class="skill-plain">Google Tag Manager</span>
-      <span class="skill-plain">Conversion tracking</span>
+      <span class="skill-plain">Conversion-Tracking</span>
     </div>
 
     <div class="skill-group">
-      <h4>Strategy</h4>
+      <h4 id="h4-strategy">Strategie</h4>
       <div class="skill-entry">
-        <span class="skill-main">Marketing Strategy &amp; Planning</span>
-        <span class="skill-sub">4Ps / 7Ps · STP Framework</span>
+        <span class="skill-main" id="st-main1">Marketingstrategie &amp; -planung</span>
+        <span class="skill-sub" id="st-sub1">4Ps / 7Ps · STP-Framework</span>
       </div>
       <div class="skill-entry">
-        <span class="skill-main">Audience Targeting &amp; Segmentation</span>
-        <span class="skill-sub">International · Multilingual · Multi-market</span>
+        <span class="skill-main" id="st-main2">Zielgruppen-Targeting &amp; Segmentierung</span>
+        <span class="skill-sub" id="st-sub2">International · Mehrsprachig · Multi-Markt</span>
       </div>
-      <span class="skill-plain">Funnel Architecture</span>
-      <span class="skill-plain">Technical SEO</span>
-      <span class="skill-plain">International Market Expansion</span>
+      <span class="skill-plain" id="st-plain1">Funnel-Architektur</span>
+      <span class="skill-plain" id="st-plain2">Technisches SEO</span>
+      <span class="skill-plain" id="st-plain3">Internationale Marktexpansion</span>
     </div>
 
   </div>
@@ -739,62 +853,62 @@
 
 <!-- CAREER -->
 <section>
-  <div class="sec-label">Career</div>
+  <div class="sec-label" id="sec-career">Werdegang</div>
 
   <div class="exp-row">
-    <div class="exp-period">Oct 2022 — Apr 2026</div>
-    <div class="exp-role">Online Performance Marketing Manager<span>Linara GmbH · Berlin · Part-time Hybrid</span></div>
-    <div class="exp-tag end">Until Apr 2026</div>
+    <div class="exp-period">Okt. 2022 — Apr. 2026</div>
+    <div class="exp-role" id="job1-role">Online Performance Marketing Manager<span id="job1-co">Linara GmbH · Berlin · Teilzeit Hybrid</span></div>
+    <div class="exp-tag end" id="job1-tag">Bis Apr. 2026</div>
   </div>
   <div class="exp-row">
-    <div class="exp-period">May 2022 — Oct 2022</div>
-    <div class="exp-role">IT Support — TikTok Ads Platform<span>TikTok · Berlin</span></div>
+    <div class="exp-period">Mai 2022 — Okt. 2022</div>
+    <div class="exp-role" id="job2-role">IT-Support — TikTok Ads Plattform<span id="job2-co">TikTok · Berlin</span></div>
     <div class="exp-tag">Ads</div>
   </div>
   <div class="exp-row">
-    <div class="exp-period">Jun 2021 — Jan 2022</div>
-    <div class="exp-role">Sales Performance Marketing Specialist<span>Concentrix for Meta Ads · Berlin</span></div>
+    <div class="exp-period">Jun. 2021 — Jan. 2022</div>
+    <div class="exp-role" id="job3-role">Sales Performance Marketing Specialist<span id="job3-co">Concentrix für Meta Ads · Berlin</span></div>
     <div class="exp-tag">Meta</div>
   </div>
   <div class="exp-row">
-    <div class="exp-period">May 2020 — Jun 2021</div>
-    <div class="exp-role">Online Marketer — Google Ads &amp; Analytics<span>Majorel for Google · Berlin · DACH</span></div>
+    <div class="exp-period">Mai 2020 — Jun. 2021</div>
+    <div class="exp-role" id="job4-role">Online Marketer — Google Ads &amp; Analytics<span id="job4-co">Majorel für Google · Berlin · DACH</span></div>
     <div class="exp-tag">Google</div>
   </div>
   <div class="exp-row">
-    <div class="exp-period">Jun 2018 — Jan 2020</div>
-    <div class="exp-role">German Language Teacher<span>Freelance · Berlin</span></div>
-    <div class="exp-tag">Lang</div>
+    <div class="exp-period">Jun. 2018 — Jan. 2020</div>
+    <div class="exp-role" id="job5-role">Deutschlehrer<span id="job5-co">Freiberuflich · Berlin</span></div>
+    <div class="exp-tag">Sprache</div>
   </div>
 </section>
 
 <!-- LANGUAGES -->
 <section class="alt">
-  <div class="sec-label">Languages</div>
+  <div class="sec-label" id="sec-lang">Sprachen</div>
   <div class="lang-grid">
     <div>
-      <span class="lang-name">Portuguese</span>
-      <span class="lang-level">Native</span>
+      <span class="lang-name">Portugiesisch</span>
+      <span class="lang-level" id="lv-native">Muttersprache</span>
       <div class="lang-track p100"></div>
     </div>
     <div>
-      <span class="lang-name">German</span>
+      <span class="lang-name">Deutsch</span>
       <span class="lang-level">C2</span>
       <div class="lang-track p95"></div>
     </div>
     <div>
-      <span class="lang-name">English</span>
+      <span class="lang-name">Englisch</span>
       <span class="lang-level">C1</span>
       <div class="lang-track p80"></div>
     </div>
     <div>
-      <span class="lang-name">Italian</span>
-      <span class="lang-level">C1 · EU Citizen</span>
+      <span class="lang-name">Italienisch</span>
+      <span class="lang-level" id="lv-it">C1 · EU-Staatsbürger</span>
       <div class="lang-track p78"></div>
     </div>
     <div>
-      <span class="lang-name">Spanish</span>
-      <span class="lang-level">Conversational</span>
+      <span class="lang-name">Spanisch</span>
+      <span class="lang-level" id="lv-es">Konversationssicher</span>
       <div class="lang-track p55"></div>
     </div>
   </div>
@@ -802,26 +916,30 @@
 
 <!-- CLOSER -->
 <div class="closer">
-  <div class="closer-tagline">Strategy.<br>Code.<br><em>Results.</em></div>
+  <div class="closer-tagline">
+    <span id="tagline-1">Strategie.</span><br>
+    <span id="tagline-2">Code.</span><br>
+    <em id="tagline-3">Ergebnisse.</em>
+  </div>
   <div class="closer-note">
-    The combination is less common than it sounds. Running international acquisition campaigns across seven markets, writing the marketing strategy, building the analytics stack, and developing the tools the team was missing — that is what the last three years at Linara looked like.<br><br>
-    <strong>Lehramt Deutsch als Fremdsprache · Universidade Federal do Paraná · Brazil.</strong><br>
-    Berlin-based since 2017. Available from May 2026.
+    <span id="closer-note">Die Kombination ist seltener als sie klingt. Internationale Akquisitionskampagnen über sieben Märkte hinweg führen, die Marketingstrategie ausarbeiten, den Analytics-Stack aufbauen und die Tools entwickeln, die dem Team fehlten — so sahen die letzten drei Jahre bei Linara aus.</span><br><br>
+    <strong><span id="closer-edu">Lehramt Deutsch als Fremdsprache · Universidade Federal do Paraná · Brasilien.</span></strong><br>
+    <span id="closer-avail">In Berlin seit 2017. Verfügbar ab Mai 2026.</span>
   </div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
   <div class="footer-left">
-    <div class="footer-heading">Want the full picture?</div>
-    <p class="footer-note">The detailed CV covers every role, the full analytics setup, the chatbot architecture, and the strategy work — with enough detail to make a decision.</p>
+    <div class="footer-heading" id="footer-heading">Interesse geweckt?</div>
+    <p class="footer-note" id="footer-note">Der ausführliche Lebenslauf umfasst jeden Berufseinstieg, das vollständige Analytics-Setup, die Chatbot-Architektur und die Strategiearbeit — mit genug Detail für eine fundierte Entscheidung.</p>
     <a href="https://www.linkedin.com/in/tiago-leichsenring-34134536/" class="footer-linkedin" target="_blank" rel="noopener">
       linkedin.com/in/tiago-leichsenring
     </a>
   </div>
   <a href="cv2.html" class="cta-link">
-    <span class="cta-link-label">Full professional CV</span>
-    <span class="cta-link-text">View detailed CV</span>
+    <span class="cta-link-label" id="cta-label">Vollständiger Lebenslauf</span>
+    <span class="cta-link-text" id="cta-text">Jetzt ansehen</span>
   </a>
 </div>
 
