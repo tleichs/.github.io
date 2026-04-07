@@ -311,7 +311,15 @@
 
   @media print {
     .lang-switcher { display: none !important; }
-    .header-top-bar { display: none !important; }
+    .pdf-download-hero { display: none !important; }
+    .pdf-lang-flags { display: flex !important; }
+  }
+  .pdf-lang-flags {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-size: 22px;
+    line-height: 1;
   }
 
 </style>
@@ -322,7 +330,7 @@ const T = {
   de: {
     htmlLang: 'de',
     title: 'Tiago Leichsenring – Senior Performance Marketing Manager',
-    titleLine: 'Senior Online Performance Marketing Manager · Berlin · Verfügbar ab Mai 2026',
+    titleLine: 'Senior Online Performance Marketing Manager · Berlin · Ab sofort verfügbar',
     downloadBtn: '↓ Lebenslauf als PDF',
     summary: 'Performance Marketing Manager mit über 5 Jahren Praxiserfahrung mit Google, Meta, Bing und LinkedIn Ads — strategische Kampagnenplanung kombiniert mit technischer Entwicklungskompetenz. 200% Kundenwachstum im ersten Jahr, vollständige Marketingstrategie für zwei Marken entwickelt, nicht funktionierende Akquisitionskanäle in sieben europäischen Ländern aufgebaut und KI-gestützte Tools entwickelt, die kein anderes Teammitglied hätte bauen können.',
     m1: 'Kundenwachstum · Jahr 1 bei Linara',
@@ -410,14 +418,14 @@ const T = {
     tr2: 'SEO Deep Dive — OMT',
     tr3: 'Google Ads (5+ Jahre Praxis)',
     tr4: 'Meta Ads (4+ Jahre Praxis)',
-    tr5: 'Autodidakt: Python / Flask',
+    tr5: 'JavaScript · Java (Android)',
     sideProfile: 'Profil',
     pr1: 'Italienischer Staatsbürger · volle EU-Arbeitsgenehmigung',
     pr2: 'Seit 2017 in Berlin',
-    pr3: 'Verfügbar ab Mai 2026',
+    pr3: 'Ab sofort verfügbar',
     pr4: 'International: DACH + Osteuropa',
     pr5: 'Strategie, Analytics, technische Umsetzung — eigenständig',
-    natNote: 'Tiago Leichsenring · Italienisch & brasilianischer Staatsbürger · EU-Arbeitsgenehmigung · Berlin · Verfügbar ab Mai 2026',
+    natNote: 'Tiago Leichsenring · Italienisch & brasilianischer Staatsbürger · EU-Arbeitsgenehmigung · Berlin · Ab sofort verfügbar',
     footerL: 'Lebenslauf — Detaillierte Version',
     footerM: 'linkedin.com/in/tiago-leichsenring-34134536',
     footerR: 'April 2026',
@@ -425,7 +433,7 @@ const T = {
   en: {
     htmlLang: 'en',
     title: 'Tiago Leichsenring – Senior Performance Marketing Manager',
-    titleLine: 'Senior Online Performance Marketing Manager · Berlin · Available May 2026',
+    titleLine: 'Senior Online Performance Marketing Manager · Berlin · Available immediately',
     downloadBtn: '↓ Download CV as PDF',
     summary: 'Performance marketing manager with 5+ years of hands-on experience across Google, Meta, Bing, and LinkedIn Ads — combining strategic planning and campaign management with technical development capability. Delivered 200% customer growth in a competitive regulated market, developed the full marketing strategy for two brands, rebuilt dead acquisition channels across seven European countries, and independently built AI-powered tools when no one else on the team could.',
     m1: 'Customer growth · Year 1 at Linara',
@@ -506,14 +514,14 @@ const T = {
     tr2: 'SEO Deep Dive — OMT',
     tr3: 'Google Ads (hands-on, 5+ yrs)',
     tr4: 'Meta Ads (hands-on, 4+ yrs)',
-    tr5: 'Self-taught: Python / Flask',
+    tr5: 'JavaScript · Java (Android)',
     sideProfile: 'Profile',
     pr1: 'Italian citizen · full EU work authorisation',
     pr2: 'Berlin-based since 2017',
-    pr3: 'Available from May 2026',
+    pr3: 'Available immediately',
     pr4: 'International: DACH + Eastern Europe',
     pr5: 'Strategy, analytics, technical execution — independently',
-    natNote: 'Tiago Leichsenring · Italian & Brazilian citizen · EU Work Authorisation · Berlin · Available May 2026',
+    natNote: 'Tiago Leichsenring · Italian & Brazilian citizen · EU Work Authorisation · Berlin · Available immediately',
     footerL: 'Curriculum Vitae — Detailed Version',
     footerM: 'linkedin.com/in/tiago-leichsenring-34134536',
     footerR: 'April 2026',
@@ -631,6 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <!-- Top bar: flags only -->
   <div class="header-top-bar">
     <span></span>
+    <span class="pdf-lang-flags">🇧🇷 🇩🇪 🇬🇧 🇮🇹 🇪🇸</span>
     <div class="lang-switcher">
       <button class="flag-btn active" id="flag-de" onclick="switchLang('de')" title="Deutsch">🇩🇪</button>
       <button class="flag-btn" id="flag-en" onclick="switchLang('en')" title="English">🇬🇧</button>
@@ -641,13 +650,12 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="header-grid">
     <div class="name-block">
       <h1>Tiago <em>Leichsenring</em></h1>
-      <div class="title-line" id="title-line">Senior Online Performance Marketing Manager · Berlin · Verfügbar ab Mai 2026</div>
+      <div class="title-line" id="title-line">Senior Online Performance Marketing Manager · Berlin · Ab sofort verfügbar</div>
     </div>
     <div class="header-right">
       <div class="contact-block">
         <div><a href="https://www.linkedin.com/in/tiago-leichsenring-34134536/">linkedin/tiago-leichsenring</a></div>
-        <div>Berlin · 10407 · Deutschland</div>
-        <div id="lang-line">PT · DE · EN · IT · ES</div>
+        <div>Berlin · 13509 · Deutschland</div>
       </div>
       <a href="cv2_leichsenring.pdf" download="Tiago_Leichsenring_CV.pdf" class="pdf-download-hero" id="pdf-btn">↓ Lebenslauf als PDF</a>
     </div>
@@ -832,7 +840,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <span class="cert-tag" id="tr2">SEO Deep Dive — OMT</span>
       <span class="cert-tag" id="tr3">Google Ads (5+ Jahre Praxis)</span>
       <span class="cert-tag" id="tr4">Meta Ads (4+ Jahre Praxis)</span>
-      <span class="cert-tag" id="tr5">Autodidakt: Python / Flask</span>
+      <span class="cert-tag" id="tr5">JavaScript · Java (Android)</span>
     </div>
 
     <div class="side-section">
@@ -840,7 +848,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <ul class="skill-list">
         <li id="pr1">Italienischer Staatsbürger · volle EU-Arbeitsgenehmigung</li>
         <li id="pr2">Seit 2017 in Berlin</li>
-        <li id="pr3">Verfügbar ab Mai 2026</li>
+        <li id="pr3">Ab sofort verfügbar</li>
         <li id="pr4">International: DACH + Osteuropa</li>
         <li id="pr5">Strategie, Analytics, technische Umsetzung — eigenständig</li>
       </ul>
@@ -850,7 +858,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <div class="nat-note">
-  <span id="nat-note-text">Tiago Leichsenring · Italienisch & brasilianischer Staatsbürger · EU-Arbeitsgenehmigung · Berlin · Verfügbar ab Mai 2026</span>
+  <span id="nat-note-text">Tiago Leichsenring · Italienisch & brasilianischer Staatsbürger · EU-Arbeitsgenehmigung · Berlin · Ab sofort verfügbar</span>
 </div>
 
 <footer>
