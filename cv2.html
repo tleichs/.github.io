@@ -12,22 +12,19 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-X2QLWCTTMF');
-
   const _sd = new Set();
   window.addEventListener('scroll', () => {
     const p = Math.round((window.scrollY + window.innerHeight) / document.body.scrollHeight * 100);
     [25,50,75,100].forEach(m => {
-      if (p >= m && !_sd.has(m)) {
-        _sd.add(m);
-        gtag('event', 'scroll_depth', { depth_percent: m, page: 'cv2_decision' });
-      }
+      if (p >= m && !_sd.has(m)) { _sd.add(m); gtag('event','scroll_depth',{depth_percent:m,page:'bofu'}); }
     });
   });
   document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.dl-btn').forEach(a =>
+      a.addEventListener('click', () => gtag('event','pdf_download',{page:'bofu',lang:a.dataset.lang}))
+    );
     document.querySelectorAll('a[href*="linkedin"]').forEach(a =>
-      a.addEventListener('click', () =>
-        gtag('event', 'contact_click', { method: 'linkedin', page: 'cv2_decision' })
-      )
+      a.addEventListener('click', () => gtag('event','contact_click',{method:'linkedin',page:'bofu'}))
     );
   });
 </script>
@@ -37,808 +34,501 @@
 
 <style>
   :root {
-    --ink: #1a2e1a;
-    --paper: #ffffff;
-    --paper-dark: #f5f5f5;
-    --rule: #d5cfc5;
-    --accent: #1e4d2b;
-    --accent-light: #e8f0ea;
-    --muted: #888075;
-    --mono: 'JetBrains Mono', monospace;
+    --paper:   #ffffff;
+    --bg:      #f5f5f5;
+    --ink:     #1a1a1a;
+    --rule:    #d0ccc6;
+    --gold:    #b8761e;
+    --gold-l:  #d4983a;
+    --gold-bg: #fdf6ec;
+    --muted:   #777068;
+    --mono:    'JetBrains Mono', monospace;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;}
 
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    max-width: 1100px;
-    margin: 0 auto;
+  /* ── TOPBAR ── */
+  .topbar{background:var(--ink);color:#fff;padding:10px 64px;display:flex;justify-content:space-between;align-items:center;}
+  .topbar-left{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);}
+  .topbar-right{display:flex;align-items:center;gap:20px;}
+  .flag-btn{background:none;border:none;cursor:pointer;font-size:18px;opacity:.35;transition:opacity .2s,transform .15s;padding:2px;}
+  .flag-btn:hover{opacity:.8;transform:scale(1.1);}
+  .flag-btn.active{opacity:1;}
+  .topbar-li{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+  .topbar-li:hover{color:var(--gold-l);}
+
+  /* ── HERO ── */
+  .hero{background:var(--paper);padding:56px 64px 48px;border-bottom:2px solid var(--ink);}
+  .hero-grid{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end;margin-bottom:32px;}
+
+  .name-block h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:60px;line-height:.95;letter-spacing:-.02em;color:var(--ink);}
+  .name-block h1 em{font-style:italic;color:var(--gold);}
+  .title-line{margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:14px;}
+  .title-line::before{content:'';display:block;width:20px;height:1px;background:var(--gold);}
+
+  .hero-cta{display:flex;flex-direction:column;align-items:flex-end;gap:12px;}
+  .dl-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;text-decoration:none;border-radius:2px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;transition:all .2s;white-space:nowrap;}
+  .dl-btn-primary{background:var(--gold);color:#fff;}
+  .dl-btn-primary:hover{background:var(--gold-l);}
+  .dl-btn-secondary{background:transparent;border:1px solid var(--rule);color:var(--muted);}
+  .dl-btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+  .dl-btn svg{width:14px;height:14px;flex-shrink:0;}
+
+  .hero-summary{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;line-height:1.7;color:#444;max-width:780px;border-left:3px solid var(--gold);padding-left:22px;font-style:italic;}
+
+  /* ── PROOF BAR ── */
+  .proof-bar{background:var(--ink);display:grid;grid-template-columns:repeat(3,1fr);}
+  .proof-cell{padding:22px 32px;border-right:1px solid rgba(255,255,255,.07);}
+  .proof-cell:last-child{border-right:none;}
+  .proof-val{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--gold-l);line-height:1;display:block;}
+  .proof-desc{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:5px;display:block;}
+
+  /* ── MAIN LAYOUT ── */
+  .body-grid{display:grid;grid-template-columns:1fr 280px;background:var(--paper);}
+  .col-main{padding:48px 64px;border-right:1px solid var(--rule);}
+  .col-side{padding:48px 32px;background:var(--bg);}
+
+  /* ── SECTION HEADERS ── */
+  .sec{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:28px;margin-top:44px;}
+  .sec:first-child{margin-top:0;}
+
+  /* ── EXPERIENCE ── */
+  .exp{margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--rule);}
+  .exp:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .exp-head{display:grid;grid-template-columns:1fr auto;gap:16px;margin-bottom:3px;}
+  .exp-role{font-size:16px;font-weight:600;color:var(--ink);}
+  .exp-period{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.04em;white-space:nowrap;}
+  .exp-co{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.07em;text-transform:uppercase;margin-bottom:12px;}
+  .exp-co .loc{color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400;}
+  .exp-ctx{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:12px;line-height:1.5;}
+  .bullets{list-style:none;display:flex;flex-direction:column;gap:7px;}
+  .bullets li{font-size:14px;line-height:1.6;color:#3a3a3a;padding-left:18px;position:relative;}
+  .bullets li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+  .bullets li strong{color:var(--ink);font-weight:500;}
+
+  /* ── SIDEBAR ── */
+  .side-sec{margin-bottom:32px;}
+  .side-title{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:14px;}
+  .side-list{list-style:none;}
+  .side-list li{font-size:13px;color:#3a3a3a;padding:6px 0;border-bottom:1px solid var(--rule);display:flex;align-items:flex-start;gap:7px;}
+  .side-list li:last-child{border-bottom:none;}
+  .side-list li::before{content:'';display:block;width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px;}
+  .side-list li strong{font-weight:500;color:var(--ink);}
+  .lang-row{display:flex;justify-content:space-between;margin-bottom:10px;}
+  .lang-nm{font-size:13px;font-weight:500;color:var(--ink);}
+  .lang-lv{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+  .lang-bar{height:2px;background:var(--rule);margin-bottom:12px;position:relative;}
+  .lang-fill{position:absolute;left:0;top:0;height:100%;background:var(--gold);}
+  .cert-tag{display:inline-block;background:var(--paper);border:1px solid var(--rule);font-family:var(--mono);font-size:10px;padding:4px 10px;color:var(--muted);margin:3px 3px 0 0;}
+
+  /* ── 2-COL SKILLS ── */
+  .comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;}
+  .comp-head{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:10px;}
+  .comp-list{list-style:none;}
+  .comp-list li{font-size:13px;color:#3a3a3a;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05);}
+  .comp-list li:last-child{border-bottom:none;}
+
+  /* ── BOTTOM STRIP ── */
+  .bottom-strip{background:var(--bg);padding:20px 64px;border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px;}
+  .bs-head{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--rule);padding-bottom:5px;margin-bottom:8px;}
+  .bs-body{font-size:12px;color:#3a3a3a;line-height:1.7;}
+
+  /* ── FOOTER ── */
+  .footer-bar{background:var(--ink);padding:32px 64px;display:flex;justify-content:space-between;align-items:center;gap:40px;}
+  .footer-note{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:rgba(255,255,255,.35);}
+  .footer-ctas{display:flex;gap:12px;align-items:center;}
+
+  /* ── PRINT ── */
+  @media print{
+    .topbar .flag-btn,.topbar,.footer-bar{display:none;}
+    .dl-btn{display:none;}
+    .hero-cta .dl-btn-secondary{display:none;}
+    .proof-bar{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .body-grid{grid-template-columns:1fr 240px;}
   }
 
-  /* HEADER */
-  header {
-    padding: 16px 40px 20px;
-    border-bottom: 2px solid var(--ink);
+  @media(max-width:900px){
+    .topbar,.hero,.col-main,.col-side,.bottom-strip,.footer-bar{padding-left:28px;padding-right:28px;}
+    .hero-grid{grid-template-columns:1fr;gap:28px;}
+    .hero-cta{align-items:flex-start;}
+    .proof-bar{grid-template-columns:1fr 1fr;}
+    .body-grid{grid-template-columns:1fr;}
+    .col-side{border-top:1px solid var(--rule);}
+    .bottom-strip{grid-template-columns:1fr;}
+    .footer-bar{flex-direction:column;align-items:flex-start;}
   }
-
-  .header-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-
-  /* Flag switcher */
-  .lang-switcher {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .flag-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 2px;
-    border-radius: 2px;
-    opacity: 0.35;
-    transition: opacity 0.2s, transform 0.15s;
-    font-size: 20px;
-    line-height: 1;
-  }
-  .flag-btn:hover { opacity: 0.75; transform: scale(1.1); }
-  .flag-btn.active { opacity: 1; }
-
-  .header-grid {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 40px;
-    align-items: end;
-    margin-bottom: 20px;
-  }
-
-  .name-block h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: 64px;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-  }
-  .name-block h1 em { font-style: italic; color: var(--accent); }
-
-  .title-line {
-    margin-top: 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.165em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .title-line::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
-
-  /* Download button next to name */
-  .header-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 16px;
-  }
-
-  .contact-block {
-    text-align: right;
-    font-family: var(--mono);
-    font-size: 11px;
-    line-height: 2;
-    color: var(--muted);
-  }
-  .contact-block a { color: var(--accent); text-decoration: none; }
-  .contact-block a:hover { text-decoration: underline; }
-
-  .pdf-download-hero {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--accent);
-    color: var(--paper);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.165em;
-    text-transform: uppercase;
-    padding: 12px 24px;
-    text-decoration: none;
-    border-radius: 2px;
-    transition: opacity 0.2s;
-    white-space: nowrap;
-  }
-  .pdf-download-hero:hover { opacity: 0.85; }
-
-  .header-summary {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: #3a3a3a;
-    max-width: 800px;
-    border-left: 3px solid var(--accent);
-    padding-left: 24px;
-    font-style: italic;
-  }
-
-
-
-  /* LAYOUT */
-  .main-grid { display: block; }
-  .col-main { padding: 24px 40px; }
-  .col-side { display: none !important; }
-
-  /* SECTION HEADERS */
-  .sec-title {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.275em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .sec-title span {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
-    font-style: italic;
-    color: var(--muted);
-    text-transform: none;
-    letter-spacing: 0;
-  }
-
-  /* EXPERIENCE */
-  .exp-entry { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
-  .exp-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-  .exp-header { display: grid; grid-template-columns: 1fr auto; gap: 20px; margin-bottom: 2px; }
-  .exp-role-title { font-size: 17px; font-weight: 600; color: var(--ink); }
-  .exp-period { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.055em; white-space: nowrap; }
-  .exp-company { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.088em; margin-bottom: 8px; text-transform: uppercase; }
-  .exp-company .loc { color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
-  .exp-context { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 10px; line-height: 1.4; }
-  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-  .exp-bullets li { font-size: 13px; line-height: 1.5; color: #3a3a3a; padding-left: 20px; position: relative; }
-  .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
-  .exp-bullets li strong { color: var(--ink); font-weight: 500; }
-
-  .highlight-box { margin-top: 20px; background: var(--accent-light); border-left: 3px solid var(--accent); padding: 16px 20px; }
-  .highlight-box-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.165em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-  .highlight-box p { font-size: 13px; line-height: 1.6; color: #3a3a3a; }
-
-  /* SIDEBAR */
-  .side-section { margin-bottom: 24px; }
-  .side-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.275em; text-transform: uppercase; color: var(--accent); padding-bottom: 10px; border-bottom: 1px solid var(--rule); margin-bottom: 20px; }
-  .skill-list { list-style: none; display: flex; flex-direction: column; }
-  .skill-list li { font-size: 13px; color: #3a3a3a; padding: 7px 0; border-bottom: 1px solid var(--rule); display: flex; align-items: flex-start; gap: 8px; }
-  .skill-list li:last-child { border-bottom: none; }
-  .skill-list li::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
-  .skill-list li strong { font-weight: 500; color: var(--ink); }
-
-  .lang-entry { margin-bottom: 8px; }
-  .lang-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
-  .lang-nm { font-size: 13px; font-weight: 500; color: var(--ink); }
-  .lang-lv { font-family: var(--mono); font-size: 11px; letter-spacing: 0.11em; color: var(--muted); text-transform: uppercase; }
-  .lang-track { height: 2px; background: var(--rule); position: relative; }
-  .lang-track-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); }
-
-  .edu-entry { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--rule); }
-  .edu-entry:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-  .edu-degree { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.4; }
-  .edu-school { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-top: 3px; }
-  .edu-year { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-  .cert-tag { display: inline-block; background: var(--paper); border: 1px solid var(--rule); font-family: var(--mono); font-size: 11px; padding: 4px 10px; color: var(--muted); margin: 4px 4px 0 0; }
-
-  /* FOOTER */
-  .nat-note {
-    page-break-before: avoid !important;
-    background: #0f2d18;
-    color: var(--paper);
-    padding: 16px 24px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.088em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .nat-note span { color: rgba(255,255,255,0.4); }
-
-  footer {
-    page-break-before: avoid !important;
-    padding: 24px 72px;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--paper-dark);
-  }
-  footer p { font-family: var(--mono); font-size: 11px; letter-spacing: 0.165em; text-transform: uppercase; color: var(--muted); }
-
-  @media (max-width: 900px) {
-    header { padding: 32px; }
-    .header-grid { grid-template-columns: 1fr; }
-    .header-right { align-items: flex-start; }
-    .contact-block { text-align: left; }
-    .metrics-bar { grid-template-columns: repeat(2, 1fr); }
-    .main-grid { grid-template-columns: 1fr; }
-    .col-main { padding: 40px 32px; border-right: none; border-bottom: 1px solid var(--rule); }
-    .col-side { padding: 40px 32px; }
-    footer { padding: 24px 32px; flex-direction: column; gap: 8px; text-align: center; }
-  }
-  }
-  .pdf-lang-flags {
-    display: none;
-    align-items: center;
-    gap: 6px;
-    font-size: 22px;
-    line-height: 1;
-  }
-
-
-  .comp-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 20px;
-  }
-  .comp-col-title {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.165em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .comp-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-  }
-  .comp-list li {
-    font-size: 12px;
-    color: #3a3a3a;
-    padding: 4px 0;
-    border-bottom: 1px solid var(--rule);
-    font-weight: 400;
-  }
-  .comp-list li:last-child { border-bottom: none; }
-
-
-  @media print {
-    .lang-switcher { display: none !important; }
-    .header-top-bar { display: none !important; }
-    .pdf-download-hero { display: none !important; }
-    .pdf-lang-flags { display: flex !important; }
-
-    .main-grid {
-      display: block !important;
-    }
-    .col-main {
-      border-right: none !important;
-      padding: 16px 40px !important;
-    }
-    .col-side {
-      padding: 8px 40px 16px !important;
-      background: transparent !important;
-      border-top: 1px solid var(--rule);
-      display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
-      gap: 0 40px !important;
-    }
-    .side-section {
-      margin-bottom: 12px !important;
-    }
-    header {
-      padding: 14px 40px 18px !important;
-    }
-    .exp-entry {
-      margin-bottom: 14px !important;
-      padding-bottom: 14px !important;
-    }
-  }
-
 </style>
 
-<!-- ═══════════════════════════════ LANGUAGE DATA ═══════════════════════════════ -->
+<!-- ══ LANGUAGE DATA ══ -->
 <script>
-const T = {
-  de: {
-    htmlLang: 'de',
-    title: 'Tiago Leichsenring – Senior Performance Marketing Manager',
-    titleLine: 'Senior Online Performance Marketing Manager · Berlin · Ab sofort verfügbar',
-    downloadBtn: '↓ Lebenslauf als PDF',
-    summary: 'Performance Marketing Manager mit über 5 Jahren Praxiserfahrung mit Google, Meta, Bing und LinkedIn Ads — strategische Kampagnenplanung kombiniert mit technischer Entwicklungskompetenz. 200% Kundenwachstum im ersten Jahr, vollständige Marketingstrategie für zwei Marken entwickelt, Akquisitionskanäle in sieben europäischen Ländern aufgebaut und eigenständig einen KI-gestützten Multichannel-Chatbot entwickelt (Python/Flask, WhatsApp · Telegram · Messenger · Webchat).',
-    m1: 'Kundenwachstum · Jahr 1 bei Linara',
-    m2: 'EU-Märkte · PL RO HU HR BG LT SK',
-    m3: 'Werbeplattformen (Google Meta Bing LinkedIn TikTok)',
-    m4: 'Sprachen (PT DE EN IT + ES konversationssicher)',
-    secExp: 'Berufserfahrung',
-    secExpSub: '· Vollständig',
-    // Linara
-    l1role: 'Online Performance Marketing Manager',
-    l1period: 'Okt. 2022 — Apr. 2026',
-    l1co: 'Linara GmbH · ',
-    l1loc: 'Berlin, Deutschland · Teilzeit Hybrid',
-    l1ctx: 'Linara bietet 24-Stunden-Hauspflege in ganz Deutschland. Faircare (eine Linara-Marke) rekrutiert Pflegefachkräfte aus Osteuropa. Verantwortlich für bezahlte Kanäle, Analytics-Infrastruktur und technische Entwicklung — in Zusammenarbeit mit einem internen Team aus Video-, Design- und Meta-Ads-Spezialist:innen.',
-    l1b1l: 'Marketingstrategie & -planung:',
-    l1b1: ' Marketingplan und -strategie für Linara und Faircare entwickelt — Channel-Mix, Budget, Positionierung und internationaler Expansionsplan.',
-    l1b2l: 'Kundengewinnung (Linara DE):',
-    l1b2: ' Google Ads von null aufgebaut — Strategie, Struktur, Gebote, Landing Pages.',
-    l1b3l: 'Internationales Recruiting (Faircare):',
-    l1b2b: ' <strong>+200% Kundenwachstum im ersten Jahr</strong> — aus einer Basis nicht funktionierender Kampagnen.',
-    l1b3: ' Google Ads für Faircare neu aufgestellt (PL, RO, HU, BG) — von reinen Soft-Conversions zu Ergebnissen vergleichbar mit Meta Ads.',
-    l1b4l: 'Analytics-Infrastruktur:',
-    l1b4: ' GA4 + GTM Tracking mit benutzerdefinierten Event-Schemas aufgebaut; BigQuery-Datensätze mit SQL-Abfragen für Attributionsmodellierung, Client-ID-Matching und kanalübergreifendes Performance-Reporting erstellt.',
-    l1b5l: 'SEO und Content:',
-    l1b5: ' SEO Linara: Agenturen koordiniert. SEO Faircare: eigenständig aufgebaut. Content in Contao CMS verwaltet.',
-    l1b6l: 'Technische Entwicklung:',
-    l1b6: ' DSGVO-konforme Google Maps Integration; mehrstufiges Auswahlformular mit PLZ-Routing; Terminbuchungssystem; KI-Chatbot (Python/Flask) für WhatsApp, Telegram, Messenger und Webchat.',
-    l1hTitle: 'Eigeninitiative — KI-Chatbot-System',
-    l1hBody: 'Lücke im Beratungsfunnel identifiziert. Eigenständig einen KI-Chatbot in Python/Flask gebaut — WhatsApp, Telegram, Messenger, Webchat — mit Entscheidungsbaum-Logik. Außerhalb der Stellenbeschreibung.',
-    // TikTok
-    t1role: 'IT-Support — TikTok Ads Plattform',
-    t1period: 'Mai 2022 — Okt. 2022',
-    t1loc: 'Berlin, Deutschland',
-    t1ctx: 'Ads-Plattform-Support innerhalb der europäischen TikTok-Operations in Berlin.',
-    t1b1: 'Technischer Support für TikTok Ads — Kontoverwaltung, Tracking, Kampagnen-Setup-Fehlerbehebung für Werbetreibende im DACH-Markt.',
-    t1b2: 'Vertiefte technische Expertise in sozialen Werbeplattformen, Pixel-Tracking und Zielgruppenkonfiguration.',
-    // Meta
-    m1role: 'Sales Performance Marketing Specialist',
-    m1period: 'Jun. 2021 — Jan. 2022',
-    m1loc: 'Berlin, Deutschland',
-    m1ctx: 'Kundenberater für Facebook/Instagram-Werbetreibende zu Kampagnenstrategie und Performance.',
-    m1b1: 'Beratung von Meta-Werbetreibenden: Kampagnenstrategie, Zielgruppendefinition, kreative Ausrichtung und Budgetoptimierung.',
-    m1b2: 'Empfehlungen zur Reduzierung von Streuverlusten und Verbesserung von CTR, CPM und Anzeigenqualität.',
-    // Google
-    g1role: 'Online Marketer — Google Ads & Analytics',
-    g1period: 'Mai 2020 — Jun. 2021',
-    g1loc: 'Berlin, Deutschland · DACH-Markt',
-    g1ctx: 'Product-Support-Spezialist im Auftrag von Google für den DACH-Markt für Google Ads, Merchant Center und Google Analytics.',
-    g1b1: 'Google Ads Konten (Search, Display, Remarketing, Shopping), Merchant Center Produkt-Feeds und Google Analytics Implementierungen (Universal Analytics + GA4 + GTM) eingerichtet, diagnostiziert und optimiert.',
-    g1b2: 'Interne Ansprechperson für Google Analytics — Experte für Kollegen zu Tracking, Tags, E-Commerce-Setup und Remarketing-Listen.',
-    // Teacher
-    te1role: 'Deutschlehrer (Freiberuflich)',
-    te1period: 'Jun. 2018 — Jan. 2020',
-    te1loc: 'Berlin, Deutschland',
-    te1b1: 'Privater Deutschunterricht für Einzelpersonen und Kleingruppen; Lehrplan- und Materialentwicklung.',
-    // Bismarck
-    b1role: 'Service-Teamleiter',
-    b1period: 'Dez. 2017 — Jun. 2018',
-    b1loc: 'Berlin, Deutschland',
-    b1b1: 'Als Teamleiter im Maritim Pro Arte Hotel eingesetzt — Koordination von Servicekräften, Schichtleitung und Qualitätssicherung bei Veranstaltungen.',
-    // Sidebar
-    sideComp: 'Kernkompetenzen',
-    sk1: 'Marketingstrategie & -planung',
-    sk1s: '— beide Marken',
-    sk2s: '— Suche, Display, PMax, Shopping',
-    sk3s: '— Facebook, Instagram, Katalog',
-    sk4s: '— DACH & EU-Märkte',
-    sk5s: '— B2B & Recruiting',
-    sk6s: '— Event-Tracking, Ziele, E-Commerce',
-    sk7s: '— Attribution, Reporting',
-    sk8s: '— Flask, Chatbot APIs, Automatisierung',
-    sk9s: '— Frontend-Entwicklung',
-    sk10s: '— Content-Management',
-    sk11s: '— Technisch & inhaltlich',
-    sk12s: '— Landing-Page-Optimierung',
-    sk13s: '— LLM-Integration',
-    sideLang: 'Sprachen',
-    lv1: 'Muttersprache', lv2: 'C2', lv3: 'C1', lv4: 'C1', lv5: 'Konversationssicher',
-    ln1: 'Portugiesisch', ln2: 'Deutsch', ln3: 'Englisch', ln4: 'Italienisch', ln5: 'Spanisch',
-    sideEdu: 'Ausbildung',
-    eduDeg: 'Lehramt — Deutsch als Fremdsprache',
-    eduSch: 'Universidade Federal do Paraná (UFPR)',
-    eduYr: '2003 – 2008 · Curitiba, Brasilien',
-    sideTraining: 'Weiterbildung',
-    tr1: 'Online-Marketingstrategie — OMT',
-    tr2: 'SEO Deep Dive — OMT',
-    tr3: 'Google Ads (5+ Jahre Praxis)',
-    tr4: 'Meta Ads (4+ Jahre Praxis)',
-    tr5: 'JavaScript · Java (Android)',
-    sideProfile: 'Profil',
-    pr1: 'Italienischer Staatsbürger · volle EU-Arbeitsgenehmigung',
-    pr2: 'Seit 2017 in Berlin',
-    pr3: 'Ab sofort verfügbar',
-    natNote: 'Tiago Leichsenring · Italienisch & brasilianischer Staatsbürger · EU-Arbeitsgenehmigung · Berlin · Ab sofort verfügbar',
-    footerL: 'Lebenslauf — Detaillierte Version',
-    footerM: 'linkedin.com/in/tiago-leichsenring-34134536',
-    footerR: 'April 2026',
+const T={
+  de:{
+    htmlLang:'de',titleLine:'Senior Online Performance Marketing Manager · Berlin · Ab sofort verfügbar',
+    dlDe:'Lebenslauf als PDF',dlEn:'Download EN',
+    summary:'Performance Marketing Manager mit über 5 Jahren Praxiserfahrung mit Google, Meta, Bing und LinkedIn Ads — strategische Kampagnenplanung kombiniert mit technischer Entwicklungskompetenz. 200% Kundenwachstum im ersten Jahr, vollständige Marketingstrategie für zwei Marken entwickelt, Akquisitionskanäle in sieben europäischen Ländern aufgebaut und eigenständig einen KI-Chatbot entwickelt (Python/Flask, WhatsApp · Telegram · Messenger · Webchat).',
+    p1:'Kundenwachstum · Linara · Jahr 1',p2:'EU-Märkte · Google Ads reaktiviert',p3:'Ab sofort verfügbar',
+    secExp:'Berufserfahrung · vollständig',
+    l1r:'Online Performance Marketing Manager',l1p:'Okt. 2022 — Apr. 2026',l1co:'Linara GmbH · ',l1loc:'Berlin · Teilzeit Hybrid',
+    l1ctx:'Verantwortlich für bezahlte Kanäle, Analytics-Infrastruktur und technische Entwicklung — in Zusammenarbeit mit einem internen Team aus Video-, Design- und Meta-Ads-Spezialist:innen.',
+    l1b1l:'Marketingstrategie:',l1b1:'Marketingplan und -strategie für Linara und Faircare — Channel-Mix, Budget, Positionierung, STP-Framework, internationaler Expansionsplan.',
+    l1b2l:'Google Ads (Linara DE):',l1b2:'Von null aufgebaut — Strategie, Struktur, Gebote, Landing Pages.',
+    l1b3:'+200% Kundenwachstum im ersten Jahr — aus einer Basis nicht funktionierender Kampagnen.',
+    l1b4l:'Google Ads (Faircare):',l1b4:'Für PL, RO, HU und BG neu aufgestellt — von reinen Soft-Conversions zu Ergebnissen vergleichbar mit Meta Ads.',
+    l1b5l:'Analytics:',l1b5:'GA4 + GTM + BigQuery mit SQL — Attribution, Client-ID-Matching, kanalübergreifendes Reporting.',
+    l1b6l:'SEO:',l1b6:'Linara: Agenturen koordiniert und weiterentwickelt. Faircare: eigenständig aufgebaut.',
+    l1b7l:'Technische Entwicklung:',l1b7:'DSGVO-konforme Google Maps Integration; Auswahlformular mit PLZ-Routing; Terminbuchungssystem; KI-Chatbot (Python/Flask) für WhatsApp, Telegram, Messenger und Webchat.',
+    t1r:'IT-Support — TikTok Ads Plattform',t1p:'Mai 2022 — Okt. 2022',t1co:'TikTok · ',t1loc:'Berlin',
+    t1ctx:'Ads-Plattform-Support innerhalb der europäischen TikTok-Operations.',
+    t1b1:'Technischer Support für TikTok Ads im DACH-Markt — Kontoverwaltung, Tracking, Kampagnen-Fehlerbehebung.',
+    m1r:'Sales Performance Marketing Specialist',m1p:'Jun. 2021 — Jan. 2022',m1co:'Concentrix (Vendor Meta Ads) · ',m1loc:'Berlin',
+    m1ctx:'Kundenberater für Facebook/Instagram-Werbetreibende zu Kampagnenstrategie und Performance.',
+    m1b1:'Kampagnenstrategie, Zielgruppendefinition, kreative Ausrichtung und Budgetoptimierung für Meta-Werbetreibende.',
+    g1r:'Online Marketer — Google Ads & Analytics',g1p:'Mai 2020 — Jun. 2021',g1co:'Majorel (Vendor Google Ads) · ',g1loc:'Berlin · DACH',
+    g1ctx:'Product-Support im Auftrag von Google für den DACH-Markt.',
+    g1b1:'Google Ads, Merchant Center und Google Analytics (UA + GA4 + GTM) eingerichtet, diagnostiziert und optimiert.',
+    g1b2:'Interne Ansprechperson für Google Analytics — Tracking, Tags, E-Commerce, Remarketing.',
+    te1r:'Deutschlehrer (Freiberuflich)',te1p:'Jun. 2018 — Jan. 2020',te1co:'Freiberuflich · ',te1loc:'Berlin',
+    te1b1:'Privater Deutschunterricht; Lehrplan- und Materialentwicklung.',
+    secComp:'Kernkompetenzen',compT:'Tools',compS:'Skills',
+    secLang:'Sprachen',lv1:'Muttersprache',lv2:'C2',lv3:'C1',lv4:'C1',lv5:'Konversationssicher',
+    ln1:'Portugiesisch',ln2:'Deutsch',ln3:'Englisch',ln4:'Italienisch',ln5:'Spanisch',
+    secEdu:'Ausbildung',eduDeg:'Lehramt — Deutsch als Fremdsprache',eduSch:'Universidade Federal do Paraná (UFPR)',eduYr:'2003 – 2008 · Curitiba, Brasilien',
+    secTrain:'Weiterbildung',
+    secProf:'Profil',pr1:'Italienischer Staatsbürger · EU-Arbeitsgenehmigung',pr2:'Seit 2017 in Berlin',pr3:'Ab sofort verfügbar',
+    bsLang:'Sprachen',bsEdu:'Ausbildung',bsTrain:'Weiterbildung',
+    natNote:'Tiago Leichsenring · Italienisch & brasilianischer Staatsbürger · EU-Arbeitsgenehmigung · Berlin · Ab sofort verfügbar',
+    footerL:'Lebenslauf — Detaillierte Version',footerR:'April 2026',
+    fdl:'Lebenslauf herunterladen',
   },
-  en: {
-    htmlLang: 'en',
-    title: 'Tiago Leichsenring – Senior Performance Marketing Manager',
-    titleLine: 'Senior Online Performance Marketing Manager · Berlin · Available immediately',
-    downloadBtn: '↓ Download CV as PDF',
-    summary: 'Performance marketing manager with 5+ years of hands-on experience across Google, Meta, Bing, and LinkedIn Ads — combining strategic planning and campaign management with technical development capability. Delivered 200% customer growth, developed marketing strategy for two brands, built acquisition channels across seven European countries, and independently developed an AI-powered multichannel chatbot (Python/Flask, WhatsApp · Telegram · Messenger · Webchat).',
-    m1: 'Customer growth · Year 1 at Linara',
-    m2: 'EU markets · PL RO HU HR BG LT SK',
-    m3: 'Ad platforms (Google Meta Bing LinkedIn TikTok)',
-    m4: 'Languages (PT DE EN IT + ES conversational)',
-    secExp: 'Professional Experience',
-    secExpSub: '· Full detail',
-    l1role: 'Online Performance Marketing Manager',
-    l1period: 'Oct 2022 — Apr 2026',
-    l1co: 'Linara GmbH · ',
-    l1loc: 'Berlin, Germany · Part-time Hybrid',
-    l1ctx: 'Linara provides 24-hour home care services across Germany. Faircare (a Linara brand) recruits care professionals from Eastern Europe. Responsible for paid channels, analytics infrastructure, and technical development — collaborating with an internal team of video, design, and Meta Ads specialists.',
-    l1b1l: 'Marketing strategy & planning:',
-    l1b1: ' Developed marketing plan and strategy for Linara and Faircare — channel mix, budget, positioning, international expansion roadmap.',
-    l1b2l: 'Customer acquisition (Linara DE):',
-    l1b2: ' Built Google Ads from scratch — strategy, structure, bidding, landing pages.',
-    l1b3l: 'International recruitment (Faircare):',
-    l1b2b: ' <strong>+200% customer growth in year one</strong> — from a baseline of non-functional campaigns.',
-    l1b3: ' Rebuilt Google Ads for Faircare (PL, RO, HU, BG) — from soft-conversion only to results comparable with Meta Ads.',
-    l1b4l: 'Analytics infrastructure:',
-    l1b4: ' Built GA4 + GTM + BigQuery with SQL — attribution modelling, client ID matching, cross-channel reporting.',
-    l1b5l: 'SEO and content:',
-    l1b5: ' SEO Linara: coordinated agencies. SEO Faircare: built independently. Content in Contao CMS.',
-    l1b6l: 'Technical development:',
-    l1b6: ' GDPR-compliant Google Maps integration; multi-step selection form with postal code routing; appointment booking system; AI chatbot (Python/Flask) for WhatsApp, Telegram, Messenger and webchat.',
-    l1hTitle: 'Proactive Initiative — AI Chatbot System',
-    l1hBody: 'Gap in the consultation funnel identified. Independently built an AI chatbot in Python/Flask — WhatsApp, Telegram, Messenger, webchat — with decision tree logic. Entirely outside the original job description.',
-    t1role: 'IT Support — TikTok Ads Platform',
-    t1period: 'May 2022 — Oct 2022',
-    t1loc: 'Berlin, Germany',
-    t1ctx: "Ads platform support within TikTok's European operations in Berlin.",
-    t1b1: 'Technical support for TikTok Ads — account management, tracking, campaign setup troubleshooting for advertisers in the DACH region.',
-    t1b2: 'Deepened technical expertise in social ad platforms, pixel tracking, and audience configuration.',
-    m1role: 'Sales Performance Marketing Specialist',
-    m1period: 'Jun 2021 — Jan 2022',
-    m1loc: 'Berlin, Germany',
-    m1ctx: 'Client-facing specialist advising Facebook/Instagram advertisers on campaign strategy and performance.',
-    m1b1: 'Consultative support to Meta advertisers: campaign strategy, audience definition, creative guidance, and budget optimisation.',
-    m1b2: 'Recommendations to reduce wasted spend and improve CTR, CPM, and ad quality scores across direct response and brand objectives.',
-    g1role: 'Online Marketer — Google Ads & Analytics',
-    g1period: 'May 2020 — Jun 2021',
-    g1loc: 'Berlin, Germany · DACH Market',
-    g1ctx: 'Product support specialist working on behalf of Google for the DACH market across Google Ads, Merchant Center, and Google Analytics.',
-    g1b1: 'Set up, diagnosed, and optimised Google Ads accounts (search, display, remarketing, Shopping), Merchant Center product feeds, and Google Analytics implementations (Universal Analytics + GA4 + GTM).',
-    g1b2: 'Designated internal Point of Contact for Google Analytics — expert for colleagues on tracking, tags, e-commerce setup, and remarketing lists.',
-    te1role: 'German Language Teacher (Freelance)',
-    te1period: 'Jun 2018 — Jan 2020',
-    te1loc: 'Berlin, Germany',
-    te1b1: 'Private German language instruction for individuals and small groups; curriculum design and materials production.',
-    b1role: 'Service Team Leader',
-    b1period: 'Dec 2017 — Jun 2018',
-    b1loc: 'Berlin, Germany',
-    b1b1: 'Assigned as team leader at Maritim Pro Arte Hotel — coordinating service staff, managing shift operations, and ensuring quality standards during events.',
-    sideComp: 'Core Competencies',
-    sk1: 'Marketing Strategy & Planning',
-    sk1s: '— both brand level',
-    sk2s: '— Search, Display, PMax, Shopping',
-    sk3s: '— Facebook, Instagram, Catalogue',
-    sk4s: '— DACH & EU markets',
-    sk5s: '— B2B & recruitment',
-    sk6s: '— Event tracking, goals, e-commerce',
-    sk7s: '— Attribution, reporting',
-    sk8s: '— Flask, chatbot APIs, automation',
-    sk9s: '— Frontend development',
-    sk10s: '— Content management',
-    sk11s: '— Technical & content strategy',
-    sk12s: '— Landing page optimisation',
-    sk13s: '— LLM integration',
-    sideLang: 'Languages',
-    lv1: 'Native', lv2: 'C2', lv3: 'C1', lv4: 'C1', lv5: 'Conversational',
-    ln1: 'Portuguese', ln2: 'German', ln3: 'English', ln4: 'Italian', ln5: 'Spanish',
-    sideEdu: 'Education',
-    eduDeg: 'Lehramt — Deutsch als Fremdsprache',
-    eduSch: 'Universidade Federal do Paraná (UFPR)',
-    eduYr: '2003 – 2008 · Curitiba, Brazil',
-    sideTraining: 'Training',
-    tr1: 'Online Marketing Strategy — OMT',
-    tr2: 'SEO Deep Dive — OMT',
-    tr3: 'Google Ads (hands-on, 5+ yrs)',
-    tr4: 'Meta Ads (hands-on, 4+ yrs)',
-    tr5: 'JavaScript · Java (Android)',
-    sideProfile: 'Profile',
-    pr1: 'Italian citizen · full EU work authorisation',
-    pr2: 'Berlin-based since 2017',
-    pr3: 'Available immediately',
-    natNote: 'Tiago Leichsenring · Italian & Brazilian citizen · EU Work Authorisation · Berlin · Available immediately',
-    footerL: 'Curriculum Vitae — Detailed Version',
-    footerM: 'linkedin.com/in/tiago-leichsenring-34134536',
-    footerR: 'April 2026',
+  en:{
+    htmlLang:'en',titleLine:'Senior Online Performance Marketing Manager · Berlin · Available immediately',
+    dlDe:'Lebenslauf DE',dlEn:'Download CV as PDF',
+    summary:'Performance marketing manager with 5+ years of hands-on experience across Google, Meta, Bing and LinkedIn Ads — combining strategic planning and campaign management with technical development capability. Delivered 200% customer growth in year one, developed marketing strategy for two brands, built acquisition channels across seven European countries, and independently built an AI-powered multichannel chatbot (Python/Flask, WhatsApp · Telegram · Messenger · Webchat).',
+    p1:'Customer growth · Linara · year one',p2:'EU markets · Google Ads rebuilt',p3:'Available immediately',
+    secExp:'Professional experience · full detail',
+    l1r:'Online Performance Marketing Manager',l1p:'Oct 2022 — Apr 2026',l1co:'Linara GmbH · ',l1loc:'Berlin · Part-time Hybrid',
+    l1ctx:'Responsible for paid channels, analytics infrastructure, and technical development — collaborating with an internal team of video, design, and Meta Ads specialists.',
+    l1b1l:'Marketing strategy:',l1b1:'Full marketing plan and strategy for Linara and Faircare — channel mix, budget allocation, positioning, STP framework, international expansion roadmap.',
+    l1b2l:'Google Ads (Linara DE):',l1b2:'Built from scratch — strategy, structure, bidding, landing pages.',
+    l1b3:'+200% customer growth in year one — from a baseline of non-functional campaigns.',
+    l1b4l:'Google Ads (Faircare):',l1b4:'Rebuilt for PL, RO, HU and BG — from soft-conversion only to results comparable with Meta Ads.',
+    l1b5l:'Analytics:',l1b5:'GA4 + GTM + BigQuery with SQL — attribution modelling, client ID matching, cross-channel reporting.',
+    l1b6l:'SEO:',l1b6:'Linara: coordinated and developed via agencies. Faircare: independently built and executed.',
+    l1b7l:'Technical development:',l1b7:'GDPR-compliant Google Maps integration; multi-step selection form with postal code routing; appointment booking system; AI chatbot (Python/Flask) for WhatsApp, Telegram, Messenger and webchat.',
+    t1r:'IT Support — TikTok Ads Platform',t1p:'May 2022 — Oct 2022',t1co:'TikTok · ',t1loc:'Berlin',
+    t1ctx:'Ads platform support within TikTok\'s European operations.',
+    t1b1:'Technical support for TikTok Ads in the DACH market — account management, tracking, campaign troubleshooting.',
+    m1r:'Sales Performance Marketing Specialist',m1p:'Jun 2021 — Jan 2022',m1co:'Concentrix (vendor Meta Ads) · ',m1loc:'Berlin',
+    m1ctx:'Client-facing specialist advising Facebook/Instagram advertisers on campaign strategy and performance.',
+    m1b1:'Campaign strategy, audience definition, creative guidance and budget optimisation for Meta advertisers.',
+    g1r:'Online Marketer — Google Ads & Analytics',g1p:'May 2020 — Jun 2021',g1co:'Majorel (vendor Google Ads) · ',g1loc:'Berlin · DACH',
+    g1ctx:'Product support specialist on behalf of Google for the DACH market.',
+    g1b1:'Set up, diagnosed and optimised Google Ads accounts, Merchant Center feeds, and Google Analytics (UA + GA4 + GTM).',
+    g1b2:'Internal point of contact for Google Analytics — tracking, tags, e-commerce, remarketing.',
+    te1r:'German Language Teacher (Freelance)',te1p:'Jun 2018 — Jan 2020',te1co:'Freelance · ',te1loc:'Berlin',
+    te1b1:'Private German instruction for individuals and small groups; curriculum and materials development.',
+    secComp:'Core Competencies',compT:'Tools',compS:'Skills',
+    secLang:'Languages',lv1:'Native',lv2:'C2',lv3:'C1',lv4:'C1',lv5:'Conversational',
+    ln1:'Portuguese',ln2:'German',ln3:'English',ln4:'Italian',ln5:'Spanish',
+    secEdu:'Education',eduDeg:'Lehramt — Deutsch als Fremdsprache',eduSch:'Universidade Federal do Paraná (UFPR)',eduYr:'2003 – 2008 · Curitiba, Brazil',
+    secTrain:'Training',
+    secProf:'Profile',pr1:'Italian citizen · full EU work authorisation',pr2:'Berlin-based since 2017',pr3:'Available immediately',
+    bsLang:'Languages',bsEdu:'Education',bsTrain:'Training',
+    natNote:'Tiago Leichsenring · Italian & Brazilian citizen · EU Work Authorisation · Berlin · Available immediately',
+    footerL:'Curriculum Vitae — Detailed Version',footerR:'April 2026',
+    fdl:'Download CV',
   }
 };
 
-function applyLang(code) {
-  const t = T[code];
-  document.documentElement.lang = t.htmlLang;
-  document.title = t.title;
+function applyLang(code){
+  const t=T[code];
+  document.documentElement.lang=t.htmlLang;
+  const s=id=>document.getElementById(id);
+  const set=(id,key)=>{if(s(id))s(id).textContent=t[key];};
+  const setH=(id,key)=>{if(s(id))s(id).innerHTML=t[key];};
 
-  const s = id => document.getElementById(id);
-  const si = id => s(id) ? s(id).innerHTML = T[code][id.replace(/-/g,'_')] : null;
+  set('title-line','titleLine');
+  set('dl-de-txt','dlDe');set('dl-en-txt','dlEn');
+  setH('hero-summary','summary');
+  set('p1','p1');set('p2','p2');set('p3','p3');
+  set('sec-exp','secExp');
+  set('l1r','l1r');set('l1p','l1p');set('l1co','l1co');set('l1loc','l1loc');set('l1ctx','l1ctx');
+  s('l1b1').innerHTML='<strong>'+t.l1b1l+'</strong> '+t.l1b1;
+  s('l1b2').innerHTML='<strong>'+t.l1b2l+'</strong> '+t.l1b2;
+  s('l1b3').innerHTML='<strong>'+t.l1b3+'</strong>';
+  s('l1b4').innerHTML='<strong>'+t.l1b4l+'</strong> '+t.l1b4;
+  s('l1b5').innerHTML='<strong>'+t.l1b5l+'</strong> '+t.l1b5;
+  s('l1b6').innerHTML='<strong>'+t.l1b6l+'</strong> '+t.l1b6;
+  s('l1b7').innerHTML='<strong>'+t.l1b7l+'</strong> '+t.l1b7;
+  set('t1r','t1r');set('t1p','t1p');set('t1co','t1co');set('t1loc','t1loc');set('t1ctx','t1ctx');set('t1b1','t1b1');
+  set('m1r','m1r');set('m1p','m1p');set('m1co','m1co');set('m1loc','m1loc');set('m1ctx','m1ctx');set('m1b1','m1b1');
+  set('g1r','g1r');set('g1p','g1p');set('g1co','g1co');set('g1loc','g1loc');set('g1ctx','g1ctx');set('g1b1','g1b1');set('g1b2','g1b2');
+  set('te1r','te1r');set('te1p','te1p');set('te1co','te1co');set('te1loc','te1loc');set('te1b1','te1b1');
+  set('sec-comp','secComp');set('comp-t','compT');set('comp-s','compS');
+  set('sec-lang','secLang');
+  set('lv1','lv1');set('lv2','lv2');set('lv3','lv3');set('lv4','lv4');set('lv5','lv5');
+  set('ln1','ln1');set('ln2','ln2');set('ln3','ln3');set('ln4','ln4');set('ln5','ln5');
+  set('sec-edu','secEdu');set('edu-deg','eduDeg');set('edu-sch','eduSch');set('edu-yr','eduYr');
+  set('sec-train','secTrain');
+  set('sec-prof','secProf');set('pr1','pr1');set('pr2','pr2');set('pr3','pr3');
+  set('bs-lang','bsLang');set('bs-edu','bsEdu');set('bs-train','bsTrain');
+  set('nat-note','natNote');set('footer-l','footerL');set('footer-r','footerR');
+  set('footer-dl-txt','fdl');
 
-  // Helper: set text by id from key
-  const set = (id, key) => { if(s(id)) s(id).textContent = t[key]; };
-  const setH = (id, key) => { if(s(id)) s(id).innerHTML = t[key]; };
+  // PDF links
+  const pdf = code==='de'?'cv2_leichsenring_de.pdf':'cv2_leichsenring_en.pdf';
+  const fname = code==='de'?'Tiago_Leichsenring_Lebenslauf.pdf':'Tiago_Leichsenring_CV.pdf';
+  document.querySelectorAll('.dl-btn-primary').forEach(a=>{a.href=pdf;a.download=fname;a.dataset.lang=code;});
 
-  set('title-line', 'titleLine');
-  s('pdf-btn').textContent = t.downloadBtn;
-  setH('header-summary', 'summary');
-  set('m1-desc', 'm1'); set('m2-desc', 'm2'); set('m3-desc', 'm3');
-  set('m4-desc', 'm4'); set('m5-desc', 'm5');
-  set('sec-exp', 'secExp'); set('sec-exp-sub', 'secExpSub');
-
-  // Linara
-  set('l1-role', 'l1role'); set('l1-period', 'l1period');
-  set('l1-co', 'l1co'); set('l1-loc', 'l1loc'); set('l1-ctx', 'l1ctx');
-  set('l1-b1l', 'l1b1l'); setH('l1-b1', 'l1b2'); // reuse innerHTML for strong tags
-  s('l1-b1').innerHTML = '<strong>' + t.l1b1l + '</strong>' + t.l1b1;
-  s('l1-b2').innerHTML = '<strong>' + t.l1b2l + '</strong>' + t.l1b2;
-  if(s('l1-b2b') && t.l1b2b) s('l1-b2b').innerHTML = t.l1b2b;
-  s('l1-b3').innerHTML = '<strong>' + t.l1b3l + '</strong>' + t.l1b3;
-  s('l1-b4').innerHTML = '<strong>' + t.l1b4l + '</strong>' + t.l1b4;
-  s('l1-b5').innerHTML = '<strong>' + t.l1b5l + '</strong>' + t.l1b5;
-  s('l1-b6').innerHTML = '<strong>' + t.l1b6l + '</strong>' + t.l1b6;
-
-  // TikTok
-  set('t1-role', 't1role'); set('t1-period', 't1period');
-  set('t1-loc', 't1loc'); set('t1-ctx', 't1ctx');
-  set('t1-b1', 't1b1'); set('t1-b2', 't1b2');
-
-  // Meta
-  set('m1-role', 'm1role'); set('m1-period', 'm1period');
-  set('m1-loc', 'm1loc'); set('m1-ctx', 'm1ctx');
-  set('m1-b1', 'm1b1'); set('m1-b2', 'm1b2');
-
-  // Google
-  set('g1-role', 'g1role'); set('g1-period', 'g1period');
-  set('g1-loc', 'g1loc'); set('g1-ctx', 'g1ctx');
-  set('g1-b1', 'g1b1'); set('g1-b2', 'g1b2');
-
-  // Teacher
-  set('te1-role', 'te1role'); set('te1-period', 'te1period');
-  set('te1-loc', 'te1loc'); set('te1-b1', 'te1b1');
-
-  // Bismarck
-  set('b1-role', 'b1role'); set('b1-period', 'b1period');
-  set('b1-loc', 'b1loc'); set('b1-b1', 'b1b1');
-
-  // Sidebar
-  set('side-comp', 'sideComp');
-  set('comp-tools-title', code === 'de' ? 'Tools' : 'Tools');
-  set('comp-skills-title', code === 'de' ? 'Skills' : 'Skills');
-  set('sk1', code === 'de' ? 'Marketingstrategie' : 'Marketing Strategy');
-  set('sk1', 'sk1'); set('sk1s', 'sk1s');
-  set('sk2s', 'sk2s'); set('sk3s', 'sk3s'); set('sk4s', 'sk4s');
-  set('sk5s', 'sk5s'); set('sk6s', 'sk6s'); set('sk7s', 'sk7s');
-  set('sk8s', 'sk8s'); set('sk9s', 'sk9s'); set('sk10s', 'sk10s');
-  set('sk11s', 'sk11s'); set('sk12s', 'sk12s'); set('sk13s', 'sk13s');
-
-  set('side-lang', 'sideLang');
-  set('lv1', 'lv1'); set('lv2', 'lv2'); set('lv3', 'lv3'); set('lv4', 'lv4'); set('lv5', 'lv5');
-  set('ln1', 'ln1'); set('ln2', 'ln2'); set('ln3', 'ln3'); set('ln4', 'ln4'); set('ln5', 'ln5');
-
-  set('side-edu', 'sideEdu');
-  set('edu-deg', 'eduDeg'); set('edu-sch', 'eduSch'); set('edu-yr', 'eduYr');
-
-  set('side-training', 'sideTraining');
-  set('tr1', 'tr1'); set('tr2', 'tr2'); set('tr3', 'tr3'); set('tr4', 'tr4'); set('tr5', 'tr5');
-
-  set('side-profile', 'sideProfile');
-  set('pr1', 'pr1'); set('pr2', 'pr2'); set('pr3', 'pr3'); set('pr4', 'pr4'); set('pr5', 'pr5');
-
-  set('nat-note-text', 'natNote');
-  set('footer-l', 'footerL'); set('footer-m', 'footerM'); set('footer-r', 'footerR');
-
-  // Switch PDF download link
-  const pdfBtn = document.getElementById('pdf-btn');
-  if (pdfBtn) {
-    pdfBtn.href = code === 'de' ? 'cv2_leichsenring_de.pdf' : 'cv2_leichsenring_en.pdf';
-    pdfBtn.download = code === 'de' ? 'Tiago_Leichsenring_Lebenslauf.pdf' : 'Tiago_Leichsenring_CV.pdf';
-    pdfBtn.textContent = t.downloadBtn;
-  }
-
-  // Flags
-  document.querySelectorAll('.flag-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('flag-' + code).classList.add('active');
-
-  localStorage.setItem('preferred_lang', code);
-  if (typeof gtag !== 'undefined') gtag('event', 'language_switch', { language: code, page: 'cv2_decision' });
+  document.querySelectorAll('.flag-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('flag-'+code).classList.add('active');
+  localStorage.setItem('preferred_lang',code);
+  if(typeof gtag!=='undefined') gtag('event','language_switch',{language:code,page:'bofu'});
 }
-
-function switchLang(code) { applyLang(code); }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('preferred_lang');
-  const browser = navigator.language || 'de';
-  const detected = saved || (browser.startsWith('de') ? 'de' : 'en');
-  applyLang(detected);
+function switchLang(c){applyLang(c);}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('preferred_lang');
+  const browser=navigator.language||'de';
+  applyLang(saved||(browser.startsWith('de')?'de':'en'));
 });
 </script>
-
 </head>
 <body>
 
-<header>
-  <!-- Top bar: flags only -->
-  <div class="header-top-bar">
-    <span></span>
-    <span class="pdf-lang-flags">🇧🇷 🇩🇪 🇬🇧 🇮🇹 🇪🇸</span>
-    <div class="lang-switcher">
+<!-- TOPBAR -->
+<div class="topbar">
+  <span class="topbar-left">tleichs.github.io/cv2</span>
+  <div class="topbar-right">
+    <div style="display:flex;gap:6px;">
       <button class="flag-btn active" id="flag-de" onclick="switchLang('de')" title="Deutsch">🇩🇪</button>
       <button class="flag-btn" id="flag-en" onclick="switchLang('en')" title="English">🇬🇧</button>
     </div>
+    <a href="https://www.linkedin.com/in/tiago-leichsenring-34134536/" class="topbar-li" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="index.html" class="topbar-li">← Übersicht</a>
   </div>
+</div>
 
-  <!-- Name + download button -->
-  <div class="header-grid">
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid">
     <div class="name-block">
       <h1>Tiago <em>Leichsenring</em></h1>
       <div class="title-line" id="title-line">Senior Online Performance Marketing Manager · Berlin · Ab sofort verfügbar</div>
     </div>
-    <div class="header-right">
-      <div class="contact-block">
-        <div><a href="https://www.linkedin.com/in/tiago-leichsenring-34134536/">linkedin/tiago-leichsenring</a></div>
-        <div>Berlin · 13509 · Deutschland</div>
-      </div>
-      <a href="cv2_leichsenring.pdf" download="Tiago_Leichsenring_CV.pdf" class="pdf-download-hero" id="pdf-btn">↓ Lebenslauf als PDF</a>
+    <div class="hero-cta">
+      <a href="cv2_leichsenring_de.pdf" download="Tiago_Leichsenring_Lebenslauf.pdf" class="dl-btn dl-btn-primary" data-lang="de">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M3 13h10"/></svg>
+        <span id="dl-de-txt">Lebenslauf als PDF</span>
+      </a>
+      <a href="https://www.linkedin.com/in/tiago-leichsenring-34134536/" class="dl-btn dl-btn-secondary" target="_blank" rel="noopener">
+        LinkedIn → Kontakt aufnehmen
+      </a>
     </div>
   </div>
-
-  <p class="header-summary" id="header-summary">
-    Performance Marketing Manager mit über 5 Jahren Praxiserfahrung mit Google, Meta, Bing und LinkedIn Ads — strategische Kampagnenplanung kombiniert mit technischer Entwicklungskompetenz. 200% Kundenwachstum im ersten Jahr, vollständige Marketingstrategie für zwei Marken entwickelt, nicht funktionierende Akquisitionskanäle in sieben europäischen Ländern aufgebaut und KI-gestützte Tools entwickelt.
-  </p>
+  <p class="hero-summary" id="hero-summary">Performance Marketing Manager mit über 5 Jahren Praxiserfahrung...</p>
 </header>
 
-<div class="main-grid">
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-cell"><span class="proof-val">+200%</span><span class="proof-desc" id="p1">Kundenwachstum · Linara · Jahr 1</span></div>
+  <div class="proof-cell"><span class="proof-val">7</span><span class="proof-desc" id="p2">EU-Märkte · Google Ads reaktiviert</span></div>
+  <div class="proof-cell"><span class="proof-val">Sofort</span><span class="proof-desc" id="p3">Ab sofort verfügbar</span></div>
+</div>
+
+<!-- MAIN BODY -->
+<div class="body-grid">
+
+  <!-- MAIN COLUMN -->
   <div class="col-main">
 
-    <div class="sec-title"><span id="sec-exp">Berufserfahrung</span> <span id="sec-exp-sub">· Vollständig</span></div>
+    <div class="sec" id="sec-exp">Berufserfahrung · vollständig</div>
 
     <!-- LINARA -->
-    <div class="exp-entry">
-      <div class="exp-header">
-        <div class="exp-role-title" id="l1-role">Online Performance Marketing Manager</div>
-        <div class="exp-period" id="l1-period">Okt. 2022 — Apr. 2026</div>
-      </div>
-      <div class="exp-company"><span id="l1-co">Linara GmbH · </span><span class="loc" id="l1-loc">Berlin, Deutschland · Teilzeit Hybrid</span></div>
-      <div class="exp-context" id="l1-ctx">Linara bietet 24-Stunden-Hauspflege in ganz Deutschland. Faircare (eine Linara-Marke) rekrutiert Pflegefachkräfte aus Osteuropa. Alleiniger Marketing-Manager für beide Marken.</div>
-      <ul class="exp-bullets">
-        <li id="l1-b1"><strong>Marketingstrategie & -planung:</strong> Den vollständigen Marketingplan und die Strategie für Linara und Faircare entwickelt — Channel-Mix, Budgetallokation, Marktpositionierung, Zielgruppensegmentierung und internationaler Expansionsplan.</li>
-        <li id="l1-b2"><strong>Kundengewinnung (Linara DE):</strong> Google Ads von null aufgebaut — Strategie, Struktur, Gebote, Landing Pages.</li>
-        <li id="l1-b2b"><strong>+200% Kundenwachstum im ersten Jahr</strong> — aus einer Basis nicht funktionierender Kampagnen.</li>
-        <li id="l1-b3"><strong>Internationales Recruiting (Faircare):</strong> Google Ads für Faircare neu aufgestellt (PL, RO, HU, BG) — von reinen Soft-Conversions zu Ergebnissen vergleichbar mit Meta Ads.</li>
-        <li id="l1-b4"><strong>Analytics-Infrastruktur:</strong> GA4 + GTM + BigQuery mit SQL — Attribution, Client-ID-Matching, kanalübergreifendes Reporting.</li>
-        <li id="l1-b5"><strong>SEO und Content:</strong> SEO-Strategie für mehrsprachige Märkte definiert; Website-Inhalte in Contao CMS verwaltet; Landing Pages per A/B-Testing optimiert.</li>
-        <li id="l1-b6"><strong>Technische Entwicklung:</strong> DSGVO-konforme Google Maps Integration; mehrstufiges Pflegeleistungs-Auswahlformular mit PLZ-Routing; Terminbuchungssystem; React/HTML-Komponenten.</li>
+    <div class="exp">
+      <div class="exp-head"><div class="exp-role" id="l1r">Online Performance Marketing Manager</div><div class="exp-period" id="l1p">Okt. 2022 — Apr. 2026</div></div>
+      <div class="exp-co"><span id="l1co">Linara GmbH · </span><span class="loc" id="l1loc">Berlin · Teilzeit Hybrid</span></div>
+      <div class="exp-ctx" id="l1ctx">Verantwortlich für bezahlte Kanäle, Analytics-Infrastruktur und technische Entwicklung — in Zusammenarbeit mit einem internen Team.</div>
+      <ul class="bullets">
+        <li id="l1b1"><strong>Marketingstrategie:</strong> Marketingplan und -strategie für Linara und Faircare.</li>
+        <li id="l1b2"><strong>Google Ads (Linara DE):</strong> Von null aufgebaut — Strategie, Struktur, Gebote, Landing Pages.</li>
+        <li id="l1b3"><strong>+200% Kundenwachstum im ersten Jahr</strong> — aus einer Basis nicht funktionierender Kampagnen.</li>
+        <li id="l1b4"><strong>Google Ads (Faircare):</strong> Für PL, RO, HU und BG neu aufgestellt — von Soft-Conversions zu Ergebnissen vergleichbar mit Meta Ads.</li>
+        <li id="l1b5"><strong>Analytics:</strong> GA4 + GTM + BigQuery mit SQL — Attribution, Client-ID-Matching, Reporting.</li>
+        <li id="l1b6"><strong>SEO:</strong> Linara: Agenturen koordiniert. Faircare: eigenständig aufgebaut.</li>
+        <li id="l1b7"><strong>Technische Entwicklung:</strong> DSGVO-konforme Google Maps; Auswahlformular mit PLZ-Routing; KI-Chatbot (Python/Flask) für 4 Kanäle.</li>
       </ul>
-      </div>
+    </div>
 
     <!-- TIKTOK -->
-    <div class="exp-entry">
-      <div class="exp-header">
-        <div class="exp-role-title" id="t1-role">IT-Support — TikTok Ads Plattform</div>
-        <div class="exp-period" id="t1-period">Mai 2022 — Okt. 2022</div>
-      </div>
-      <div class="exp-company">TikTok · <span class="loc" id="t1-loc">Berlin, Deutschland</span></div>
-      <div class="exp-context" id="t1-ctx">Ads-Plattform-Support innerhalb der europäischen TikTok-Operations in Berlin.</div>
-      <ul class="exp-bullets">
-        <li id="t1-b1">Technischer Support für TikTok Ads im DACH-Markt — Kontoverwaltung, Tracking, Kampagnen-Fehlerbehebung.</li>
-        
-      </ul>
+    <div class="exp">
+      <div class="exp-head"><div class="exp-role" id="t1r">IT-Support — TikTok Ads Plattform</div><div class="exp-period" id="t1p">Mai 2022 — Okt. 2022</div></div>
+      <div class="exp-co"><span id="t1co">TikTok · </span><span class="loc" id="t1loc">Berlin</span></div>
+      <div class="exp-ctx" id="t1ctx">Ads-Plattform-Support innerhalb der europäischen TikTok-Operations.</div>
+      <ul class="bullets"><li id="t1b1">Technischer Support für TikTok Ads im DACH-Markt — Kontoverwaltung, Tracking, Kampagnen-Fehlerbehebung.</li></ul>
     </div>
 
     <!-- META -->
-    <div class="exp-entry">
-      <div class="exp-header">
-        <div class="exp-role-title" id="m1-role">Sales Performance Marketing Specialist</div>
-        <div class="exp-period" id="m1-period">Jun. 2021 — Jan. 2022</div>
-      </div>
-      <div class="exp-company">Concentrix (Vendor für Meta Ads) · <span class="loc" id="m1-loc">Berlin, Deutschland</span></div>
-      <div class="exp-context" id="m1-ctx">Kundenberater für Facebook/Instagram-Werbetreibende zu Kampagnenstrategie und Performance.</div>
-      <ul class="exp-bullets">
-        <li id="m1-b1">Beratung von Meta-Werbetreibenden: Kampagnenstrategie, Zielgruppendefinition, kreative Ausrichtung und Budgetoptimierung.</li>
-        
-      </ul>
+    <div class="exp">
+      <div class="exp-head"><div class="exp-role" id="m1r">Sales Performance Marketing Specialist</div><div class="exp-period" id="m1p">Jun. 2021 — Jan. 2022</div></div>
+      <div class="exp-co"><span id="m1co">Concentrix (Vendor Meta Ads) · </span><span class="loc" id="m1loc">Berlin</span></div>
+      <div class="exp-ctx" id="m1ctx">Kundenberater für Facebook/Instagram-Werbetreibende.</div>
+      <ul class="bullets"><li id="m1b1">Kampagnenstrategie, Zielgruppendefinition, kreative Ausrichtung und Budgetoptimierung für Meta-Werbetreibende.</li></ul>
     </div>
 
     <!-- GOOGLE -->
-    <div class="exp-entry">
-      <div class="exp-header">
-        <div class="exp-role-title" id="g1-role">Online Marketer — Google Ads &amp; Analytics</div>
-        <div class="exp-period" id="g1-period">Mai 2020 — Jun. 2021</div>
-      </div>
-      <div class="exp-company">Majorel (Vendor für Google Ads) · <span class="loc" id="g1-loc">Berlin, Deutschland · DACH-Markt</span></div>
-      <div class="exp-context" id="g1-ctx">Product-Support-Spezialist im Auftrag von Google für den DACH-Markt.</div>
-      <ul class="exp-bullets">
-        <li id="g1-b1">Google Ads Konten (Search, Display, Remarketing, Shopping), Merchant Center Feeds und Google Analytics (Universal Analytics + GA4 + GTM) eingerichtet, diagnostiziert und optimiert.</li>
-        
+    <div class="exp">
+      <div class="exp-head"><div class="exp-role" id="g1r">Online Marketer — Google Ads &amp; Analytics</div><div class="exp-period" id="g1p">Mai 2020 — Jun. 2021</div></div>
+      <div class="exp-co"><span id="g1co">Majorel (Vendor Google Ads) · </span><span class="loc" id="g1loc">Berlin · DACH</span></div>
+      <div class="exp-ctx" id="g1ctx">Product-Support im Auftrag von Google für den DACH-Markt.</div>
+      <ul class="bullets">
+        <li id="g1b1">Google Ads, Merchant Center und Google Analytics (UA + GA4 + GTM) eingerichtet, diagnostiziert und optimiert.</li>
+        <li id="g1b2">Interne Ansprechperson für Google Analytics — Tracking, Tags, E-Commerce, Remarketing.</li>
       </ul>
     </div>
 
     <!-- TEACHER -->
-    <div class="exp-entry">
-      <div class="exp-header">
-        <div class="exp-role-title" id="te1-role">Deutschlehrer (Freiberuflich)</div>
-        <div class="exp-period" id="te1-period">Jun. 2018 — Jan. 2020</div>
+    <div class="exp">
+      <div class="exp-head"><div class="exp-role" id="te1r">Deutschlehrer (Freiberuflich)</div><div class="exp-period" id="te1p">Jun. 2018 — Jan. 2020</div></div>
+      <div class="exp-co"><span id="te1co">Freiberuflich · </span><span class="loc" id="te1loc">Berlin</span></div>
+      <ul class="bullets"><li id="te1b1">Privater Deutschunterricht; Lehrplan- und Materialentwicklung.</li></ul>
+    </div>
+
+    <!-- COMPETENCIES -->
+    <div class="sec" id="sec-comp">Kernkompetenzen</div>
+    <div class="comp-grid">
+      <div>
+        <div class="comp-head" id="comp-t">Tools</div>
+        <ul class="comp-list">
+          <li>Google Ads</li><li>Meta Ads</li><li>Bing Ads</li>
+          <li>LinkedIn Ads</li><li>Taboola Ads</li>
+          <li>GA4 + GTM</li><li>BigQuery / SQL</li>
+          <li>Python / Flask</li><li>Contao CMS</li>
+          <li>HTML5 / CSS3 / JS</li>
+        </ul>
       </div>
-      <div class="exp-company">Freiberuflich · <span class="loc" id="te1-loc">Berlin, Deutschland</span></div>
-      <ul class="exp-bullets">
-        <li id="te1-b1">Privater Deutschunterricht für Einzelpersonen und Kleingruppen; Lehrplan- und Materialentwicklung.</li>
-      </ul>
+      <div>
+        <div class="comp-head" id="comp-s">Skills</div>
+        <ul class="comp-list">
+          <li>Marketingstrategie &amp; -planung</li>
+          <li>4Ps / 7Ps · STP-Framework</li>
+          <li>Audience Targeting &amp; Segmentierung</li>
+          <li>Funnel-Architektur</li>
+          <li>Technisches SEO</li>
+          <li>Prompt Engineering</li>
+          <li>KI-Chatbot-Entwicklung</li>
+          <li>A/B Testing</li>
+        </ul>
+      </div>
     </div>
 
   </div><!-- /col-main -->
 
+  <!-- SIDEBAR -->
   <div class="col-side">
 
-    
-    <div class="side-section">
-      <div class="side-title" id="side-lang">Sprachen</div>
-      <ul class="comp-list">
-        <li><strong id="ln1">Portugiesisch</strong> <span id="lv1" style="color:var(--muted);font-size:10px;">Muttersprache</span></li>
-        <li><strong id="ln2">Deutsch</strong> <span id="lv2" style="color:var(--muted);font-size:10px;">C2</span></li>
-        <li><strong id="ln3">Englisch</strong> <span id="lv3" style="color:var(--muted);font-size:10px;">C1</span></li>
-        <li><strong id="ln4">Italienisch</strong> <span id="lv4" style="color:var(--muted);font-size:10px;">C1</span></li>
-        <li><strong id="ln5">Spanisch</strong> <span id="lv5" style="color:var(--muted);font-size:10px;">Konversationssicher</span></li>
+    <div class="side-sec">
+      <div class="side-title" id="sec-lang">Sprachen</div>
+      <div class="lang-row"><span class="lang-nm" id="ln1">Portugiesisch</span><span class="lang-lv" id="lv1">Muttersprache</span></div>
+      <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+      <div class="lang-row"><span class="lang-nm" id="ln2">Deutsch</span><span class="lang-lv" id="lv2">C2</span></div>
+      <div class="lang-bar"><div class="lang-fill" style="width:95%"></div></div>
+      <div class="lang-row"><span class="lang-nm" id="ln3">Englisch</span><span class="lang-lv" id="lv3">C1</span></div>
+      <div class="lang-bar"><div class="lang-fill" style="width:80%"></div></div>
+      <div class="lang-row"><span class="lang-nm" id="ln4">Italienisch</span><span class="lang-lv" id="lv4">C1</span></div>
+      <div class="lang-bar"><div class="lang-fill" style="width:78%"></div></div>
+      <div class="lang-row"><span class="lang-nm" id="ln5">Spanisch</span><span class="lang-lv" id="lv5">Konversationssicher</span></div>
+      <div class="lang-bar" style="margin-bottom:0"><div class="lang-fill" style="width:55%"></div></div>
+    </div>
+
+    <div class="side-sec">
+      <div class="side-title" id="sec-edu">Ausbildung</div>
+      <p style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px;" id="edu-deg">Lehramt — Deutsch als Fremdsprache</p>
+      <p style="font-family:var(--mono);font-size:10px;color:var(--gold);margin-bottom:2px;" id="edu-sch">Universidade Federal do Paraná (UFPR)</p>
+      <p style="font-family:var(--mono);font-size:10px;color:var(--muted);" id="edu-yr">2003 – 2008 · Curitiba, Brasilien</p>
+    </div>
+
+    <div class="side-sec">
+      <div class="side-title" id="sec-train">Weiterbildung</div>
+      <span class="cert-tag">Online-Marketingstrategie — OMT</span>
+      <span class="cert-tag">SEO Deep Dive — OMT</span>
+      <span class="cert-tag">Google Ads (5+ J. Praxis)</span>
+      <span class="cert-tag">Meta Ads (4+ J. Praxis)</span>
+      <span class="cert-tag">JavaScript · Java (Android)</span>
+    </div>
+
+    <div class="side-sec">
+      <div class="side-title" id="sec-prof">Profil</div>
+      <ul class="side-list">
+        <li id="pr1">Italienischer Staatsbürger · EU-Arbeitsgenehmigung</li>
+        <li id="pr2">Seit 2017 in Berlin</li>
+        <li id="pr3">Ab sofort verfügbar</li>
       </ul>
     </div>
 
-    <div class="side-section">
-      <div class="side-title" id="side-edu">Ausbildung</div>
-      <div class="edu-entry">
-        <div class="edu-degree" id="edu-deg">Lehramt — Deutsch als Fremdsprache</div>
-        <div class="edu-school" id="edu-sch">Universidade Federal do Paraná (UFPR)</div>
-        <div class="edu-year" id="edu-yr">2003 – 2008 · Curitiba, Brasilien</div>
-      </div>
+    <!-- SIDEBAR CTA -->
+    <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--rule);">
+      <a href="cv2_leichsenring_de.pdf" download="Tiago_Leichsenring_Lebenslauf.pdf" class="dl-btn dl-btn-primary" data-lang="de" style="width:100%;justify-content:center;font-size:10px;">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M3 13h10"/></svg>
+        <span id="footer-dl-txt">Lebenslauf herunterladen</span>
+      </a>
     </div>
 
-<div style="padding:8px 40px 12px;border-top:1px solid #d5cfc5;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 28px;background:#f5f5f5;">
+  </div><!-- /col-side -->
+
+</div><!-- /body-grid -->
+
+<!-- BOTTOM STRIP -->
+<div class="bottom-strip">
   <div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#1e4d2b;padding-bottom:5px;border-bottom:1px solid #d5cfc5;margin-bottom:7px;">Sprachen</div>
-    <div style="font-size:11px;color:#3a3a3a;line-height:1.6;">
-      Portugiesisch <span style="color:#888;">Muttersprache</span><br>
-      Deutsch <span style="color:#888;">C2</span> · Englisch <span style="color:#888;">C1</span><br>
-      Italienisch <span style="color:#888;">C1</span> · Spanisch <span style="color:#888;">Konv.</span>
-    </div>
+    <div class="bs-head" id="bs-lang">Sprachen</div>
+    <div class="bs-body">PT Muttersprache · DE C2 · EN C1 · IT C1 · ES konversationssicher</div>
   </div>
   <div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#1e4d2b;padding-bottom:5px;border-bottom:1px solid #d5cfc5;margin-bottom:7px;">Ausbildung</div>
-    <div style="font-size:11px;color:#3a3a3a;line-height:1.6;">
-      <strong>Lehramt — Deutsch als Fremdsprache</strong><br>
-      <span style="color:#888;">Universidade Federal do Paraná (UFPR)</span><br>
-      <span style="color:#888;">2003 – 2008 · Curitiba, Brasilien</span>
-    </div>
+    <div class="bs-head" id="bs-edu">Ausbildung</div>
+    <div class="bs-body" id="edu-deg-b">Lehramt DaF · UFPR Curitiba · 2003–2008</div>
   </div>
   <div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#1e4d2b;padding-bottom:5px;border-bottom:1px solid #d5cfc5;margin-bottom:7px;">Weiterbildung</div>
-    <div style="font-size:11px;color:#3a3a3a;line-height:1.6;">
-      Online-Marketingstrategie — OMT<br>
-      SEO Deep Dive — OMT<br>
-      JavaScript · Java (Android)
-    </div>
+    <div class="bs-head" id="bs-train">Weiterbildung</div>
+    <div class="bs-body">Online-Marketingstrategie OMT · SEO OMT · JS · Java Android</div>
   </div>
 </div>
 
-<div class="nat-note">
-  <span id="nat-note-text">Tiago Leichsenring · Italienisch & brasilianischer Staatsbürger · EU-Arbeitsgenehmigung · Berlin · Ab sofort verfügbar</span>
+<!-- NAT NOTE -->
+<div style="background:var(--ink);color:rgba(255,255,255,.35);padding:14px 64px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span id="nat-note">Tiago Leichsenring · Italienisch & brasilianischer Staatsbürger · EU-Arbeitsgenehmigung · Berlin · Ab sofort verfügbar</span>
 </div>
 
-<footer>
-  <p id="footer-l">Lebenslauf — Detaillierte Version</p>
-  <p id="footer-m">linkedin.com/in/tiago-leichsenring-34134536</p>
-  <p id="footer-r">April 2026</p>
-</footer>
+<!-- FOOTER -->
+<div class="footer-bar">
+  <div>
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px;" id="footer-l">Lebenslauf — Detaillierte Version</div>
+    <div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.4);" id="footer-r">April 2026</div>
+  </div>
+  <div class="footer-ctas">
+    <a href="cv2_leichsenring_de.pdf" download="Tiago_Leichsenring_Lebenslauf.pdf" class="dl-btn dl-btn-primary" data-lang="de">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M3 13h10"/></svg>
+      <span id="dl-de-txt2">Lebenslauf als PDF</span>
+    </a>
+    <a href="https://www.linkedin.com/in/tiago-leichsenring-34134536/" class="dl-btn dl-btn-secondary" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.5);" target="_blank" rel="noopener">
+      LinkedIn →
+    </a>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('preferred_lang');
+  const browser=navigator.language||'de';
+  applyLang(saved||(browser.startsWith('de')?'de':'en'));
+  const s2=document.getElementById('dl-de-txt2');
+  if(s2){
+    const code=saved||(browser.startsWith('de')?'de':'en');
+    s2.textContent=T[code].dlDe;
+  }
+});
+</script>
 
 </body>
 </html>
