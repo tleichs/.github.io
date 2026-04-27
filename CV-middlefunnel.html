@@ -7,16 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,700;1,300;1,700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0C0F14;
-    --surface: #121620;
-    --surface2: #1A1F2C;
-    --border: #222838;
-    --blue: #3A72DC;
-    --blue2: #5A92FC;
-    --green: #2BC48A;
-    --text: #C8D4E8;
-    --text2: #6A7890;
-    --cream: #E8F0F8;
+    --bg: #F8F5EF;
+    --surface: #FFFDF8;
+    --surface2: #EFE8DD;
+    --border: #DED3C4;
+    --blue: #7A263A;
+    --blue2: #2F6B4F;
+    --green: #2F6B4F;
+    --text: #26231F;
+    --text2: #554B43;
+    --cream: #26231F;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -178,7 +178,7 @@
     text-transform: uppercase;
     background: rgba(58,114,220,0.15);
     color: var(--blue2);
-    border: 1px solid rgba(58,114,220,0.3);
+    border: 1px solid rgba(47,107,79,0.45);
     padding: 0.15rem 0.5rem;
     margin-left: 0.4rem;
   }
@@ -272,6 +272,18 @@
     .diff-grid { grid-template-columns: 1fr; }
     .exp-row { grid-template-columns: 1fr; gap: 0.25rem; }
     .mf-footer { padding: 2rem; }
+  }
+
+  body,
+  body * {
+    font-family: Verdana, Geneva, sans-serif !important;
+  }
+
+  .mf-name,
+  .section-title,
+  .case-title {
+    letter-spacing: 0.01em;
+    line-height: 1.18;
   }
 </style>
 </head>

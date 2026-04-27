@@ -7,17 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #09090C;
-    --slide-bg: #0F1018;
-    --border: #1E2030;
-    --indigo: #5865F2;
-    --indigo2: #7B85F8;
-    --cream: #E8E4DC;
-    --text: #C0B8D0;
-    --text2: #60587A;
-    --green: #3DD68C;
-    --yellow: #F5C518;
-    --red: #E84545;
+    --bg: #F8F5EF;
+    --slide-bg: #FFFDF8;
+    --border: #DED3C4;
+    --indigo: #7A263A;
+    --indigo2: #2F6B4F;
+    --cream: #26231F;
+    --text: #3D3530;
+    --text2: #554B43;
+    --green: #2F6B4F;
+    --yellow: #7A263A;
+    --red: #7A263A;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; overflow: hidden; }
@@ -111,8 +111,8 @@
   }
   .avail-chip {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    background: rgba(88,101,242,0.15);
-    border: 1px solid rgba(88,101,242,0.3);
+    background: #DCE9DF;
+    border: 1px solid rgba(47,107,79,0.45);
     color: var(--indigo2);
     font-size: 0.72rem; letter-spacing: 0.1em;
     padding: 0.5rem 1rem; text-transform: uppercase;
@@ -148,7 +148,7 @@
     gap: 1.5rem;
   }
   .bs-item {
-    background: rgba(255,255,255,0.03);
+    background: var(--slide-bg);
     border: 1px solid var(--border);
     border-top: 2px solid var(--indigo);
     padding: 2rem 2rem 1.75rem;
@@ -185,7 +185,7 @@
   .tl-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
   .tl-tag {
     font-size: 0.62rem; letter-spacing: 0.05em;
-    color: var(--text2); background: rgba(255,255,255,0.04);
+    color: var(--text2); background: #EFE8DD;
     border: 1px solid var(--border); padding: 0.15rem 0.5rem;
   }
 
@@ -206,19 +206,19 @@
   .tools-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; }
   .tool-chip {
     font-size: 0.75rem;
-    background: rgba(255,255,255,0.04);
+    background: #EFE8DD;
     border: 1px solid var(--border);
     color: var(--text);
     padding: 0.5rem 1rem;
     transition: all 0.2s;
   }
   .tool-chip:hover { border-color: var(--indigo); color: var(--indigo2); }
-  .tool-chip.featured { border-color: rgba(88,101,242,0.4); color: var(--indigo2); }
+  .tool-chip.featured { border-color: rgba(47,107,79,0.45); color: var(--indigo2); }
 
   /* LANGUAGES */
   .lang-grid-pp { display: grid; grid-template-columns: repeat(5,1fr); gap: 1rem; }
   .lp-item {
-    background: rgba(255,255,255,0.03);
+    background: var(--slide-bg);
     border: 1px solid var(--border);
     padding: 1.5rem 1rem; text-align: center;
     transition: border-color 0.2s;
@@ -234,7 +234,7 @@
   /* DIFFERENTIATORS SLIDE */
   .diff-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .diff-card {
-    background: rgba(255,255,255,0.03);
+    background: var(--slide-bg);
     border: 1px solid var(--border);
     padding: 1.5rem;
   }
@@ -258,7 +258,7 @@
     display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
   }
   .cc-item {
-    background: rgba(255,255,255,0.04);
+    background: #EFE8DD;
     border: 1px solid var(--border);
     padding: 1rem 2rem; text-align: center;
     min-width: 180px;
@@ -311,6 +311,18 @@
     .skill-bars { grid-template-columns: 1fr; }
     .diff-2col { grid-template-columns: 1fr; }
     .lang-grid-pp { grid-template-columns: 1fr 1fr; }
+  }
+
+  body,
+  body * {
+    font-family: Verdana, Geneva, sans-serif !important;
+  }
+
+  .slide-title-screen h1,
+  .slide-h,
+  .closing-slide .big {
+    letter-spacing: 0.01em;
+    line-height: 1.16;
   }
 </style>
 </head>

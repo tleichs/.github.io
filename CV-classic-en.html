@@ -6,7 +6,7 @@
 <title>Tiago Leichsenring — Classic CV</title>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#1A1614;--ink2:#3D3530;--ink3:#6B6158;--rule:#D4C8BC;--gold:#8B6B3E;--bg:#FAFAF8;--page:#FFFFFF; }
+  :root { --ink:#1A1614;--ink2:#3D3530;--ink3:#554B43;--rule:#D4C8BC;--gold:#2F6B4F;--bg:#F8F5EF;--page:#FFFDF8; }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);font-family:'Jost',sans-serif;color:var(--ink);font-size:14px;line-height:1.6;}
   .back-btn{position:fixed;top:1.5rem;left:1.5rem;font-family:'Jost',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink3);text-decoration:none;background:var(--page);border:1px solid var(--rule);padding:0.5rem 1rem;transition:all 0.2s;z-index:100;}
@@ -24,9 +24,10 @@
   .cv-section{margin-bottom:2.5rem;}
   .cv-section-title{font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.75rem;}
   .cv-section-title::after{content:'';flex:1;height:1px;background:var(--rule);}
-  .achievements-band{background:var(--ink);padding:1.25rem 1.75rem;display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem;}
-  .ach-mini .num{font-family:'EB Garamond',serif;font-size:1.8rem;color:#D4A847;line-height:1;}
-  .ach-mini .lbl{font-size:0.72rem;color:#999;}
+  .achievements-band{background:var(--page);border:1px solid var(--rule);border-left:6px solid var(--gold);padding:1.25rem 1.75rem;display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+  .ach-mini{color:var(--ink);}
+  .ach-mini .num{font-family:'EB Garamond',serif;font-size:1.8rem;color:var(--gold);line-height:1;}
+  .ach-mini .lbl{font-size:0.72rem;color:var(--ink3);}
   .job{margin-bottom:1.75rem;}
   .job-head{display:grid;grid-template-columns:1fr auto;margin-bottom:0.25rem;}
   .job-title{font-family:'EB Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--ink);}
@@ -45,6 +46,8 @@
   .lang-pill span{color:var(--ink3);margin-left:0.4rem;}
   @media print{.back-btn{display:none;}body{background:white;}.page{box-shadow:none;margin:0;max-width:100%;}}
   @media(max-width:680px){.page{padding:2rem;}.cv-head{grid-template-columns:1fr;}.cv-avail{text-align:left;}.bottom-grid{grid-template-columns:1fr;}}
+  body,body *{font-family:Verdana,Geneva,sans-serif!important;}
+  .cv-name,.job-title,.ach-mini .num{letter-spacing:0.01em;line-height:1.18;}
 </style>
 </head>
 <body>

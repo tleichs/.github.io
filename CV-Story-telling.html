@@ -7,14 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=DM+Serif+Display:ital@0;1&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F7F4EF;
+    --bg: #F8F5EF;
     --ink: #1C1814;
     --ink2: #3D3830;
-    --ink3: #7A7060;
-    --accent: #8B4513;
-    --accent2: #A0522D;
-    --rule: #DDD5C8;
-    --cap-bg: #1C1814;
+    --ink3: #554B43;
+    --accent: #7A263A;
+    --accent2: #2F6B4F;
+    --rule: #DED3C4;
+    --cap-bg: #FFFDF8;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -66,17 +66,17 @@
   .cover-title {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(3rem, 8vw, 7rem);
-    color: #F0E8D8;
+    color: var(--ink);
     line-height: 1.05; margin-bottom: 1rem;
     position: relative;
   }
   .cover-title em {
     display: block; font-style: italic;
-    color: #C9952A;
+    color: var(--accent);
   }
   .cover-sub {
     font-family: 'Karla', sans-serif;
-    font-size: 0.9rem; color: #7A7060;
+    font-size: 0.9rem; color: var(--ink3);
     letter-spacing: 0.05em; margin-bottom: 3rem;
     position: relative;
   }
@@ -84,7 +84,7 @@
     position: relative;
     font-family: 'Karla', sans-serif;
     font-size: 0.7rem; letter-spacing: 0.2em;
-    text-transform: uppercase; color: #4A4038;
+    text-transform: uppercase; color: var(--ink3);
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
     animation: bounce 2s ease infinite;
   }
@@ -108,7 +108,7 @@
   .ch-num {
     font-family: 'DM Serif Display', serif;
     font-size: 4rem; line-height: 1;
-    color: var(--rule); flex-shrink: 0;
+    color: var(--accent);
     margin-top: -0.5rem;
   }
   .ch-meta {}
@@ -163,18 +163,18 @@
   }
   .metric-box {
     background: var(--cap-bg);
-    color: #D4C4A0;
+    color: var(--ink);
     padding: 1.5rem;
   }
   .metric-num {
     font-family: 'DM Serif Display', serif;
-    font-size: 2.8rem; color: #C9952A;
+    font-size: 2.8rem; color: var(--accent);
     line-height: 1;
   }
   .metric-lbl {
     font-family: 'Karla', sans-serif;
     font-size: 0.7rem; letter-spacing: 0.1em;
-    text-transform: uppercase; color: #7A7060;
+    text-transform: uppercase; color: var(--ink3);
     margin-top: 0.25rem;
   }
 
@@ -182,7 +182,7 @@
   .interlude {
     text-align: center; padding: 4rem 2rem;
     background: var(--cap-bg);
-    color: #D4C4A0;
+    color: var(--ink);
     margin: 0;
   }
   .interlude .int-label {
@@ -196,7 +196,7 @@
     font-size: clamp(1.4rem, 3vw, 2.2rem);
     font-style: italic;
     max-width: 600px; margin: 0 auto;
-    line-height: 1.4; color: #EDE5D4;
+    line-height: 1.4; color: var(--ink);
   }
 
   /* SKILLS AS LIST */
@@ -214,7 +214,7 @@
   /* CHAPTER DIVIDER */
   .ch-divider {
     text-align: center; padding: 3rem 2rem;
-    color: var(--rule); font-size: 1.2rem;
+    color: var(--accent); font-size: 1.2rem;
     letter-spacing: 0.75rem;
   }
 
@@ -227,14 +227,14 @@
   .epilogue h2 {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2rem, 5vw, 4rem);
-    color: #EDE5D4;
+    color: var(--ink);
     font-style: italic;
     margin-bottom: 1.5rem;
   }
   .epilogue p {
     font-family: 'Karla', sans-serif;
     max-width: 500px; margin: 0 auto 2rem;
-    color: #7A7060; line-height: 1.7;
+    color: var(--ink3); line-height: 1.7;
   }
   .epilogue .cta-link {
     display: inline-block;
@@ -249,7 +249,7 @@
   }
   .epilogue .cta-link:hover {
     background: rgba(160,82,45,0.1);
-    color: #D4A060;
+    color: var(--accent);
     border-color: rgba(160,82,45,0.7);
   }
 
@@ -262,11 +262,24 @@
     font-size: 0.9rem;
   }
   .lang-table td:first-child { color: var(--accent); font-weight: 600; width: 40px; }
-  .lang-table td:last-child { color: var(--ink3); text-align: right; }
+  .lang-table td:last-child { color: var(--ink2); text-align: right; }
 
   @media (max-width: 600px) {
     .metric-row { grid-template-columns: 1fr; }
     .skill-two-col { grid-template-columns: 1fr; }
+  }
+
+  body,
+  body * {
+    font-family: Verdana, Geneva, sans-serif !important;
+  }
+
+  .cover-title,
+  .ch-title,
+  .interlude .int-quote,
+  .epilogue h2 {
+    letter-spacing: 0.01em;
+    line-height: 1.22;
   }
 </style>
 </head>

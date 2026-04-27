@@ -9,11 +9,11 @@
   :root {
     --ink: #1A1614;
     --ink2: #3D3530;
-    --ink3: #6B6158;
+    --ink3: #554B43;
     --rule: #D4C8BC;
-    --gold: #8B6B3E;
-    --bg: #FAFAF8;
-    --page: #FFFFFF;
+    --gold: #2F6B4F;
+    --bg: #F8F5EF;
+    --page: #FFFDF8;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -100,18 +100,20 @@
 
   /* ACHIEVEMENTS RIBBON */
   .achievements-band {
-    background: var(--ink);
+    background: var(--page);
+    border: 1px solid var(--rule);
+    border-left: 6px solid var(--gold);
     padding: 1.25rem 1.75rem;
     display: flex; gap: 2rem; flex-wrap: wrap;
     margin-bottom: 2.5rem;
   }
-  .ach-mini { color: #FFF; }
+  .ach-mini { color: var(--ink); }
   .ach-mini .num {
     font-family: 'EB Garamond', serif;
-    font-size: 1.8rem; color: #D4A847;
+    font-size: 1.8rem; color: var(--gold);
     line-height: 1;
   }
-  .ach-mini .lbl { font-size: 0.72rem; color: #999; }
+  .ach-mini .lbl { font-size: 0.72rem; color: var(--ink3); }
 
   /* EXPERIENCE */
   .job { margin-bottom: 1.75rem; }
@@ -183,6 +185,18 @@
     .cv-head { grid-template-columns: 1fr; }
     .cv-avail { text-align: left; }
     .bottom-grid { grid-template-columns: 1fr; }
+  }
+
+  body,
+  body * {
+    font-family: Verdana, Geneva, sans-serif !important;
+  }
+
+  .cv-name,
+  .job-title,
+  .ach-mini .num {
+    letter-spacing: 0.01em;
+    line-height: 1.18;
   }
 </style>
 </head>

@@ -7,19 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0D0B08;
-    --parchment: #1A1610;
-    --parchment2: #221E15;
-    --gold: #C9952A;
-    --gold2: #E8B84B;
-    --gold3: #F5D580;
-    --red: #9B2020;
-    --blue: #1A5A8A;
-    --green: #2A7A3A;
-    --text: #D4C4A0;
-    --text2: #A89878;
-    --border: #3A3020;
-    --border-gold: rgba(201,149,42,0.4);
+    --bg: #F8F5EF;
+    --parchment: #FFFDF8;
+    --parchment2: #EFE8DD;
+    --gold: #2F6B4F;
+    --gold2: #7A263A;
+    --gold3: #2F6B4F;
+    --red: #7A263A;
+    --blue: #2F6B4F;
+    --green: #2F6B4F;
+    --text: #26231F;
+    --text2: #554B43;
+    --border: #DED3C4;
+    --border-gold: rgba(47,107,79,0.32);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -53,7 +53,7 @@
   /* ── ORNAMENTAL BORDER ── */
   .sheet-frame {
     border: 2px solid var(--border-gold);
-    box-shadow: 0 0 0 6px var(--parchment), 0 0 0 7px var(--border), inset 0 0 60px rgba(0,0,0,0.5);
+    box-shadow: 0 0 0 6px var(--parchment), 0 0 0 7px var(--border);
     position: relative; padding: 2.5rem;
   }
   .corner {
@@ -140,7 +140,7 @@
   }
   .attr-bar {
     flex: 1; height: 8px;
-    background: rgba(255,255,255,0.05);
+    background: #DCE9DF;
     border: 1px solid var(--border);
     position: relative; overflow: hidden;
   }
@@ -171,7 +171,7 @@
   .vital-head .name { color: var(--text2); }
   .vital-head .nums { color: var(--text); }
   .vital-bar {
-    height: 14px; background: rgba(0,0,0,0.5);
+    height: 14px; background: #DCE9DF;
     border: 1px solid var(--border); position: relative; overflow: hidden;
   }
   .vital-fill { height: 100%; transition: width 1.2s ease; }
@@ -256,7 +256,7 @@
     gap: 0.5rem;
   }
   .inv-item {
-    background: rgba(0,0,0,0.3);
+    background: var(--parchment2);
     border: 1px solid var(--border);
     padding: 0.4rem 0.6rem;
     font-family: 'Cinzel', serif;
@@ -316,6 +316,18 @@
     .bottom-grid { grid-template-columns: 1fr; }
     .info-bar { grid-template-columns: 1fr 1fr; }
     .sheet-frame { padding: 1.25rem; }
+  }
+
+  body,
+  body * {
+    font-family: Verdana, Geneva, sans-serif !important;
+  }
+
+  .sheet-title h1,
+  .quest .q-title,
+  .panel-title {
+    letter-spacing: 0.01em;
+    line-height: 1.22;
   }
 </style>
 </head>
